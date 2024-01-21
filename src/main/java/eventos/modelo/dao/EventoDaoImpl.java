@@ -12,7 +12,6 @@ public class EventoDaoImpl implements EventoDao {
 	
 	@Autowired
 	private EventoRepository eRepo;
-	
 
 	@Override
 	public List<Evento> todosLosEventos() {
@@ -33,5 +32,5 @@ public class EventoDaoImpl implements EventoDao {
 	public List<Evento> verEventosActivos(int idEvento) {
 		return eRepo.verEventosActivos(idEvento);
 	}
-
+	
 }
