@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"/>
+<head>
+<meta charset="UTF-8">
+<title>Index</title>
+<link rel="stylesheet" type="text/css" th:href="@{css/Index.css}">
+</head>
+<body>
+	<header>
+		<img src="img/Logo.png" />
+		<h2>Eventos</h2>
+		<button>Destacados</button>
+		<button>Activos</button>
+		
+		<select th:field="*{gender}">
+			<option th:value="Concierto" th:text="Concierto"></option>
+			<option th:value="Despedida" th:text="Despedida"></option>
+			<option th:value="Cumpleaños" th:text="Cumpleaños"></option>
+			<option th:value="Boda" th:text="Boda"></option>
+			<option th:value="Conferencia" th:text="Conferencia"></option>
+			<option th:value="Deportivo" th:text="Deportivo"></option>
+			<option th:value="Cultural" th:text="Cultural"></option>
+			<option th:value="Fiesta" th:text="Fiesta"></option>
+			<option th:value="Exhibición" th:text="Exibición"></option>
+			<option th:value="Teatro" th:text="Teatro"></option>
+		</select>
+		
+		<button>Login</button>
+		<button>Registro</button>
+	</header>
+
+
+</body>
+</html>

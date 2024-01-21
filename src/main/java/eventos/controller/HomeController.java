@@ -18,6 +18,7 @@ import eventos.modelo.dao.ReservaDao;
 import eventos.modelo.dao.TipoDao;
 import eventos.modelo.dao.UsuarioDao;
 import eventos.modelo.entitis.Evento;
+import eventos.modelo.entitis.Tipo;
 import eventos.modelo.entitis.Usuario;
 import jakarta.servlet.http.HttpSession;
 
@@ -34,16 +35,7 @@ public class HomeController {
 	@Autowired
 	PerfilDao pDao;
 	
-	
-	@GetMapping("/")
-	public String verEventosDestacados(Model model, Authentication aut) {
-		
-	//	System.out.println(aut.getName() + "  -  " + aut.getAuthorities());
-		List<Evento> lista = eDao.verEventosDestacados();
-		model.addAttribute("eventosDestacados", lista);
-		return "/";	 
-	}
-	
+	//REGISTRO
 	
 	@GetMapping("/signup")
 	public String registrar(Model model) {	
@@ -68,10 +60,11 @@ public class HomeController {
 	 		return "/registro";
 	 	}
 	}
-
 	
 	
-	@GetMapping("/index")
+	//LOGIN
+	
+	@GetMapping("/login")
 	public String procesarLogin(Authentication aut, Model model, HttpSession misesion) {
 		
 		System.out.println("usuario : " + aut.getName());
@@ -87,6 +80,25 @@ public class HomeController {
 		
 		return "redirect:/";
 	}
+	
+	
+	//HOME
+	
+	@GetMapping("/")
+	public String verEventosDestacados(Model model) {
+		//System.out.println(aut.getName() + "  -  " + aut.getAuthorities());
+		List<Evento> eventosDestacados = eDao.verEventosDestacados();
+		model.addAttribute("Listado de eventos destacados", eventosDestacados);
+	
+		List<Evento> eventosActivos = eDao.verEventosDestacados();
+		model.addAttribute("Listado de eventos destacados", eventosActivos);
+		
+		List<Tipo> tiposEvento = tDao.todosLosTiposEventos();
+		model.addAttribute("Tipos de eventos", tiposEvento);
+		
+		return "/";	 
+	}
+	
 	
 
 }
