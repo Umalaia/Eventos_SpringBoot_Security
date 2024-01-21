@@ -34,6 +34,12 @@ public class ReservaDaoImpl implements ReservaDao{
 			return 0;
 		}
 	}
+	
+	@Override
+	public Reserva verUnaReserva(int idReserva) {
+		return rRepo.findById(idReserva).orElse(null);
+	}
+
 
 	@Override
 	public List<Reserva> verReservas() {
@@ -43,11 +49,6 @@ public class ReservaDaoImpl implements ReservaDao{
 	@Override
 	public List<Reserva> verReservasPorUsuario(Usuario usuario) {
 		return rRepo.verReservasPorUsuario(usuario);
-	}
-
-	@Override
-	public Reserva verUnaReserva(int idReserva) {
-		return rRepo.findById(idReserva).orElse(null);
 	}
 
 }
