@@ -11,10 +11,10 @@ public interface EventoRepository extends JpaRepository<Evento, Integer>{
 	
 	@Query
 	("Select e from Evento e where e.destacado = S")
-	public List<Evento> verEventosDestacados(int idEvento);
+	public List<Evento> verDestacados();
 	
 	@Query
 	("Select e from Evento e where e.estado = Activo")
-	public List<Evento> verEventosActivos(int idEvento);
+	public List<Evento> verActivos();
 
 }

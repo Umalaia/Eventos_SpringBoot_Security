@@ -24,13 +24,13 @@ public class EventoDaoImpl implements EventoDao {
 	}
 
 	@Override
-	public List<Evento> verEventosDestacados(int idEvento) {
-		return eRepo.verEventosDestacados(idEvento);
+	public List<Evento> verEventosDestacados() {
+		return eRepo.verDestacados();
 	}
 
 	@Override
-	public List<Evento> verEventosActivos(int idEvento) {
-		return eRepo.verEventosActivos(idEvento);
+	public List<Evento> verEventosActivos() {
+		return eRepo.verActivos();
 	}
 	
 }
