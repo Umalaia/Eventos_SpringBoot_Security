@@ -10,7 +10,7 @@
 <groupId>eventos</groupId>
 <artifactId>EDT_AD3_Eventos</artifactId>
 <version>0.0.1-SNAPSHOT</version>
-<name>EDT_AD3_Eventos</name>
+<name>SOV_JGR_KZ_AD3_Eventos</name>
 <description>Actividad 3 eventos, boot,jpa,security</description>
 <properties>
 <java.version>17</java.version>
