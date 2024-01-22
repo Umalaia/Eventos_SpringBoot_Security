@@ -7,8 +7,8 @@
 </head>
 <body>
 	<header>
-		<img src="img/Logo.png" />
-		<h2>Eventos</h2>
+		<img src="img/Logo.png"/>
+		<h1>Eventos</h1>
 		<button>Destacados</button>
 		<button>Activos</button>
 		<select>
@@ -26,7 +26,24 @@
 		<button>Login</button>
 		<button>Registro</button>
 	</header>
-
+	<section>
+		<h2>Listado de Eventos Destacados</h2>
+		<br><br>
+	<table border ="1">
+		<tr>
+			<th>Nombre</th>
+			<th>Aforo</th>
+			<th>Fecha inicio</th>
+			<th>Opciones</th>
+		</tr>
+		<tr th:each="destacado : ${destacados}">
+			<td th:text="${destacado.descripcion}"></td>
+			<td th:text="${destacado.aforoMaximo}"></td>
+			<td th:text="${destacado.fechaInicio}"></td>
+			<td><a th:href="@{/verDetalles/{id}(id=${destacado.idEvento})}">Detalles</a></td>
+		</tr>
+	</table>
+	</section>
 
 </body>
 </html>

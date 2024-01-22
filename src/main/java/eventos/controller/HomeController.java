@@ -88,18 +88,21 @@ public class HomeController {
 	
 	@GetMapping("/Index")
 	public String verIndex(Model model, Authentication aut, HttpSession misesion) {
-		System.out.println(aut.getName() + "  -  " + aut.getAuthorities());
-	
-		List<Evento> eventosDestacados = eDao.verEventosDestacados();
-		model.addAttribute("Listado de eventos destacados", eventosDestacados);
-	
-		List<Evento> eventosActivos = eDao.verEventosDestacados();
-		model.addAttribute("Listado de eventos activos", eventosActivos);
-		
-		List<Tipo> tiposEvento = tDao.todosLosTiposEventos();
-		model.addAttribute("Tipos de eventos", tiposEvento);
-	
-		return "Index";	 
+	    System.out.println(aut.getName() + "  -  " + aut.getAuthorities());
+
+	    // Obtener eventos destacados
+	    List<Evento> destacados = eDao.verEventosDestacados();
+	    model.addAttribute("destacados", destacados);
+
+	    // Obtener eventos activos (utilizando un método diferente, por ejemplo, verEventosActivos())
+	    List<Evento> activos = eDao.verEventosActivos();
+	    model.addAttribute("activos", activos);
+
+	    // Obtener todos los tipos de eventos
+	    List<Tipo> tiposEvento = tDao.todosLosTiposEventos();
+	    model.addAttribute("TiposEvento", tiposEvento);
+
+	    return "Index";     
 	}
 	
 	
