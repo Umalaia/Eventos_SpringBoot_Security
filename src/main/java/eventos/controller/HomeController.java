@@ -37,11 +37,10 @@ public class HomeController {
 	
 	//REGISTRO
 	
-	
 	@GetMapping("/signup")
 	public String registrar(Model model) {	
 	model.addAttribute("usuario", new Usuario());
-		return "registro";
+		return "Registro";
 	}
 	
 	
@@ -54,11 +53,11 @@ public class HomeController {
 	 	usuario.setPassword("{noop}"+ usuario.getPassword());
 	 	if (uDao.registro(usuario)) {
 	 		ratt.addFlashAttribute("mensaje", "alta usuario realizada");
-	 		return "redirect:/login";
+	 		return "redirect:/Login";
 	 	}
 	 	else {
 	 		model.addAttribute("mensaje", "ya existe como usuario");
-	 		return "/registro";
+	 		return "/Registro";
 	 	}
 	}
 	
@@ -94,7 +93,7 @@ public class HomeController {
 	    List<Evento> destacados = eDao.verEventosDestacados();
 	    model.addAttribute("destacados", destacados);
 
-	    // Obtener eventos activos (utilizando un método diferente, por ejemplo, verEventosActivos())
+	    // Obtener eventos activos 
 	    List<Evento> activos = eDao.verEventosActivos();
 	    model.addAttribute("activos", activos);
 

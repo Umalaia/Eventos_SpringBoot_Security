@@ -7,10 +7,10 @@
 </head>
 <body>
 	<header>
-		<img src="img/Logo.png"/>
+		<img src="img/Logo.png" />
 		<h1>Eventos</h1>
-		<button>Destacados</button>
-		<button>Activos</button>
+		<button><a th:href="@{/EventosDestacados}">Destacados</a></button>
+		<button><a th:href="@{/EventosActivos}">Activos</a></button>
 		<select>
 			<option th:value="Concierto" th:text="Concierto"></option>
 			<option th:value="Despedida" th:text="Despedida"></option>
@@ -23,8 +23,8 @@
 			<option th:value="Exhibición" th:text="Exibición"></option>
 			<option th:value="Teatro" th:text="Teatro"></option>
 		</select>
-		<button>Login</button>
-		<button>Registro</button>
+		<button><a th:href="@{/Login}">Login</a></button>
+		<button><a th:href="@{/Registro}">Registro</a></button>
 	</header>
 	<section>
 		<h2>Listado de Eventos Destacados</h2>
