@@ -37,7 +37,7 @@ public class HomeController {
 	
 	//REGISTRO
 	
-	/*
+	
 	@GetMapping("/signup")
 	public String registrar(Model model) {	
 	model.addAttribute("usuario", new Usuario());
@@ -82,24 +82,24 @@ public class HomeController {
 		return "redirect:/";
 	}
 	
-	*/
+	
 	
 	//HOME
 	
-	@GetMapping("/")
-	public String verEventosDestacados(Model model) {
-		//System.out.println(aut.getName() + "  -  " + aut.getAuthorities());
+	@GetMapping("/Index")
+	public String verIndex(Model model, Authentication aut, HttpSession misesion) {
+		System.out.println(aut.getName() + "  -  " + aut.getAuthorities());
 	
 		List<Evento> eventosDestacados = eDao.verEventosDestacados();
 		model.addAttribute("Listado de eventos destacados", eventosDestacados);
 	
 		List<Evento> eventosActivos = eDao.verEventosDestacados();
-		model.addAttribute("Listado de eventos destacados", eventosActivos);
+		model.addAttribute("Listado de eventos activos", eventosActivos);
 		
 		List<Tipo> tiposEvento = tDao.todosLosTiposEventos();
 		model.addAttribute("Tipos de eventos", tiposEvento);
 	
-		return "Index.html";	 
+		return "Index";	 
 	}
 	
 	
