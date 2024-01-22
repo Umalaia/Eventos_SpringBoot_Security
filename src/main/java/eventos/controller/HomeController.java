@@ -105,5 +105,26 @@ public class HomeController {
 	}
 	
 	
+	@GetMapping("/EventosActivos")
+	public String verActivos(Model model, Authentication aut, HttpSession misesion) {
+
+	    // Obtener eventos activos 
+	    List<Evento> activos = eDao.verEventosActivos();
+	    model.addAttribute("activos", activos);
+
+	    return "EventosActivos";     
+	}
+	
+	
+	@GetMapping("/EventosDestacados")
+	public String verDestacados(Model model, Authentication aut, HttpSession misesion) {
+
+	    List<Evento> destacados = eDao.verEventosDestacados();
+	    model.addAttribute("destacados", destacados);
+
+	    return "EventosDestacados";     
+	}
+	
+	
 
 }

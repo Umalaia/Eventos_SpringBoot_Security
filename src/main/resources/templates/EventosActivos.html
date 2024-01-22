@@ -7,5 +7,21 @@
 </head>
 <body>
 
+<h2>Listado de Eventos Activos</h2>
+		<table border="1">
+			<tr>
+				<th>Nombre</th>
+				<th>Aforo</th>
+				<th>Fecha inicio</th>
+				<th>Opciones</th>
+			</tr>
+			<tr th:each="activo : ${activos}">
+				<td th:text="${activo.descripcion}"></td>
+				<td th:text="${activo.aforoMaximo}"></td>
+				<td th:text="${activo.fechaInicio}"></td>
+				<td><a th:href="@{EventosActivos/verDetalles/{id}(id=${activo.idEvento})}">Detalles</a></td>
+			</tr>
+		</table>
+
 </body>
 </html>
