@@ -8,7 +8,7 @@
 <!--  lookup parent from repository  -->
 </parent>
 <groupId>eventos</groupId>
-<artifactId>EDT_AD3_Eventos</artifactId>
+<artifactId>SOV_JGR_KZ_AD3_Eventos</artifactId>
 <version>0.0.1-SNAPSHOT</version>
 <name>SOV_JGR_KZ_AD3_Eventos</name>
 <description>Actividad 3 eventos, boot,jpa,security</description>
