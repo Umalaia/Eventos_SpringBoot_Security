@@ -11,7 +11,7 @@ import eventos.modelo.entitis.Usuario;
 public interface ReservaRepository extends JpaRepository<Reserva, Integer>{
 	
 	@Query
-	("select r from Reserva r where r.username = ?1")
+	("select r from Reserva r where r.usuario = ?1")
 	public List<Reserva> verReservasPorUsuario(Usuario usuario);
 
 }
