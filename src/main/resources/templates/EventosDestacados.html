@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"/>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
 <title>Eventos destacados</title>
@@ -22,6 +22,8 @@
 				<td><a th:href="@{EventosDestacados/verDetalles/{id}(id=${destacado.idEvento})}">Detalles</a></td>
 			</tr>
 		</table>
+		<br>
+		<button><a th:href="@{/}">Volver a inicio</a></button>
 
 </body>
 </html>
