@@ -88,7 +88,7 @@ public class HomeController {
 	@GetMapping("/Index")
 	public String verIndex(Model model, Authentication aut, HttpSession misesion, @PathVariable("id") String username) {
 		System.out.println(aut.getName() + " - " + aut.getAuthorities());
-
+		
 		// Obtener eventos destacados
 		List<Evento> destacados = eDao.verEventosDestacados();
 		model.addAttribute("destacados", destacados);
@@ -99,7 +99,7 @@ public class HomeController {
 
 		model.addAttribute("usuario", misesion.getAttribute(username));
 
-		return "Index";
+		return "/";
 	}
 
 	@GetMapping("/EventosActivos")
