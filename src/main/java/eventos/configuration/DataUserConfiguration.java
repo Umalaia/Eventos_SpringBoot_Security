@@ -44,7 +44,7 @@ public class DataUserConfiguration {
 				.requestMatchers("/signup", "/", "/Index", "/EventosDestacados", "/EventosActivos", "/login", "/logout",
 						"/eventos/verUno/**")
 				.permitAll()
-				// .requestMatchers("/eventos/activos", "/eventos/destacados").permitAll()
+				.requestMatchers("/eventos/activos", "/eventos/destacados").permitAll()
 				.requestMatchers("/rest/encriptar/**").permitAll()
 				// Todas las demás URLs de la Aplicación requieren autenticación
 				// Asignar permisos a URLs por ROLES

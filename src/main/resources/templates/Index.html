@@ -7,39 +7,49 @@
 </head>
 <body>
 	<header>
-		<img id="logo" src="img/Logo.png"/>
-		<h1>Eventos</h1>
-		<button>
-			<a th:href="@{/EventosDestacados}">Destacados</a>
-		</button>
-		<button>
-			<a th:href="@{/EventosActivos}">Activos</a>
-		</button>
-		<select>
-			<option th:value="Concierto" th:text="Concierto"></option>
-			<option th:value="Despedida" th:text="Despedida"></option>
-			<option th:value="Cumpleaños" th:text="Cumpleaños"></option>
-			<option th:value="Boda" th:text="Boda"></option>
-			<option th:value="Conferencia" th:text="Conferencia"></option>
-			<option th:value="Deportivo" th:text="Deportivo"></option>
-			<option th:value="Cultural" th:text="Cultural"></option>
-			<option th:value="Fiesta" th:text="Fiesta"></option>
-			<option th:value="Exhibición" th:text="Exibición"></option>
-			<option th:value="Teatro" th:text="Teatro"></option>
-		</select>
-		<button>
-			<a th:href="@{/Login}">Login</a>
-		</button>
-		<button>
-			<a th:href="@{/signup}">Registro</a>
-		</button>
-		<button>
-			<a th:href="@{/signout}">Cerrar sesión</a>
-		</button>
+		<nav id="nav">
+			<div id="cont_logo">
+				<img id="logo" src="img/Logo.png" />
+			</div>
+			<div id="botones">
+				<button>
+					<a th:href="@{/EventosDestacados}">Eventos Destacados</a>
+				</button>
+				<button>
+					<a th:href="@{/EventosActivos}">Eventos Activos</a>
+				</button>
+				<select>
+					<option>Tipo de eventos</option>
+					<option th:value="Concierto" th:text="Concierto"></option>
+					<option th:value="Despedida" th:text="Despedida"></option>
+					<option th:value="Cumpleaños" th:text="Cumpleaños"></option>
+					<option th:value="Boda" th:text="Boda"></option>
+					<option th:value="Conferencia" th:text="Conferencia"></option>
+					<option th:value="Deportivo" th:text="Deportivo"></option>
+					<option th:value="Cultural" th:text="Cultural"></option>
+					<option th:value="Fiesta" th:text="Fiesta"></option>
+					<option th:value="Exhibición" th:text="Exibición"></option>
+					<option th:value="Teatro" th:text="Teatro"></option>
+				</select>
+				<button>
+					<a th:href="@{/reservas}">Mis reservas</a>
+				</button>
+				<button>
+					<a th:href="@{/Login}">Login</a>
+				</button>
+				<button>
+					<a th:href="@{/signup}">Registro</a>
+				</button>
+				<button>
+					<a th:href="@{/signout}">Cerrar sesión</a>
+				</button>
+			</div>
+		</nav>
 	</header>
-	<section>
-		<h3>Bienvenido : <span th:text="${usuario == null ? 'Anónimo' : usuario}"></span></h3>
+	<section id="seccion">
+		<div id="listado">
 		<h2>Listado de Eventos Destacados</h2>
+		
 		<table border="1">
 			<tr>
 				<th>Nombre</th>
@@ -51,9 +61,15 @@
 				<td th:text="${destacado.descripcion}"></td>
 				<td th:text="${destacado.aforoMaximo}"></td>
 				<td th:text="${destacado.fechaInicio}"></td>
-				<td><a th:href="@{EventosDestacados/verDetalles/{id}(id=${destacado.idEvento})}">Detalles</a></td>
+				<td><a th:href="@{/verDetalles/{id}(id=${destacado.idEvento})}">Detalles</a></td>
 			</tr>
 		</table>
+		</div>
+			<div id="bienvenido">
+		<h3>
+			Bienvenido : <span th:text="${usuario == null ? 'Anónimo' : usuario}"></span>
+		</h3>
+		</div>
 	</section>
 
 </body>

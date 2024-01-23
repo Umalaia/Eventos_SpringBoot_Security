@@ -4,22 +4,92 @@ body {
 	background: #CEEFF8;
 }
 
+h1 {
+	font-size: 34px;
+	color: #000040;
+	font-family: calistoga;
+}
+
+nav {
+	background: white;
+}
+
+#nav {
+	display: flex;
+	align-content: center;
+	align-items: center;
+}
+
 #logo {
-	width: 10%;
+	width: 25%;
+	margin-left: 7%;
+}
+
+#cont_logo {
+	width: 70%;
+}
+
+#botones {
+	width: 100%;
+}
+
+#seccion{
+	display: flex;
+	align-content: center;
+	align-items: center;
+}
+
+#listado{
+	width: 80%;
+	margin-left: 3%;
+}
+
+#bienvenido{
+	color: #030b67;
 }
 
 button {
+	background: #CEEFF8;
+	border: 1px solid #6c9df9;
+	padding: 8px;
+	box-shadow: 1px 1px 1px 1px #030b67;
+	border-radius: 10%;
 	font-size: 18px;
 	font-family: Calibri;
+	font-weight: bold;
+	margin-right: 15px;
 }
 
-select{
+button a{
+	color: #030b67;
+}
+
+button :hover{
+	color: #029ffd;
+
+}
+
+select {
+	color: #030b67;
+	background: #CEEFF8;
+	border: 1px solid #6c9df9;
+	padding: 8px;
+	box-shadow: 1px 1px 1px 1px #030b67;
+	border-radius: 10%;
 	font-size: 18px;
 	font-family: Calibri;
+	font-weight: bold;
+	margin-right: 15px;
 }
+
+option{
+	color: #029ffd;
+}
+
+
 
 button a {
-	color: black;
+	color: #030b67;
 	text-decoration: none;
 }
 

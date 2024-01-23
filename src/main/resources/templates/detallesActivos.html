@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Detalle evento activo</title>
+<link rel="stylesheet" type="text/css" th:href="@{css/Index.css}">
+</head>
+<body>
+	<h1>Detalles del evento activo</h1>
+	<table border="1">
+		<tr>
+			<th>Nombre</th>
+			<th>Descripción</th>
+			<th>Aforo</th>
+			<th>Dirección</th>
+			<th>Duración</th>
+			<th>Destacado</th>
+			<th>Fecha de inicio</th>
+			<th>Mínimo asistencia</th>
+			<th>Precio</th>
+		</tr>
+		<tr>
+			<td th:text="${evento.nombre}"></td>
+			<td th:text="${evento.descripcion}"></td>
+			<td th:text="${evento.aforoMaximo}"></td>
+			<td th:text="${evento.direccion}"></td>
+			<td th:text="${evento.duracion}"></td>
+			<td th:text="${evento.destacado}"></td>
+			<td th:text="${evento.fechaInicio}"></td>
+			<td th:text="${evento.minimoAsistencia}"></td>
+			<td th:text="${evento.precio}"></td>
+		</tr>
+	</table>
+	<br>
+	<button>
+		<a th:href="@{/}">Volver a inicio</a>
+	</button>
+
+</body>
+</html>

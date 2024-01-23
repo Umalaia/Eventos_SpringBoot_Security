@@ -103,10 +103,6 @@ public class HomeController {
 		List<Evento> destacados = eDao.verEventosDestacados();
 		model.addAttribute("destacados", destacados);
 
-		// Obtener eventos activos
-		List<Evento> activos = eDao.verEventosActivos();
-		model.addAttribute("activos", activos);
-
 		// Obtener todos los tipos de eventos
 		List<Tipo> tiposEvento = tDao.todosLosTiposEventos();
 		model.addAttribute("TiposEvento", tiposEvento);
