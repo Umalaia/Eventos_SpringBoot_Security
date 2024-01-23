@@ -31,11 +31,18 @@
 			<a th:href="@{/Login}">Login</a>
 		</button>
 		<button>
-			<a th:href="@{/Registro}">Registro</a>
+			<a th:href="@{/signup}">Registro</a>
+		</button>
+		<button>
+			<a th:href="@{/signout}">Cerrar sesión</a>
 		</button>
 	</header>
 	<section>
+<<<<<<< HEAD
 		<h3>Bienvenido : <span th:text="${usuario.nombre}"></span></h3>
+=======
+		<h3>Bienvenido : <span th:text="${usuario == null ? 'Anónimo' : usuario}"></span></h3>
+>>>>>>> 26ba5d984fc287c46dc8b8edb07e35cf986592cb
 		<h2>Listado de Eventos Destacados</h2>
 		<table border="1">
 			<tr>

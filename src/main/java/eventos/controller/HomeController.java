@@ -7,9 +7,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -35,53 +37,53 @@ public class HomeController {
 	ReservaDao rDao;
 	@Autowired
 	PerfilDao pDao;
-	
-	//REGISTRO
-	
+
+	// REGISTRO
+
 	@GetMapping("/signup")
-	public String registrar(Model model) {	
-	model.addAttribute("usuario", new Usuario());
+	public String registrar(Model model) {
+		model.addAttribute("usuario", new Usuario());
 		return "Registro";
 	}
-	
-	
+
 	@PostMapping("/signup")
 	public String registrar(Model model, Usuario usuario, RedirectAttributes ratt) {
-		
+
 		usuario.setEnabled(1);
 		usuario.setFechaRegistro(new Date());
-	 	usuario.addPerfil(pDao.verUnPerfil(3));
-	 	usuario.setPassword("{noop}"+ usuario.getPassword());
-	 	if (uDao.registro(usuario)) {
-	 		ratt.addFlashAttribute("mensaje", "alta usuario realizada");
-	 		return "redirect:/Login";
-	 	}
-	 	else {
-	 		model.addAttribute("mensaje", "ya existe como usuario");
-	 		return "/Registro";
-	 	}
+		usuario.addPerfil(pDao.verUnPerfil(3));
+		usuario.setPassword("{noop}" + usuario.getPassword());
+		if (uDao.registro(usuario)) {
+			ratt.addFlashAttribute("mensaje", "alta usuario realizada");
+			return "redirect:/Login";
+		} else {
+			model.addAttribute("mensaje", "ya existe como usuario");
+			return "/Registro";
+		}
 	}
-	
-	
-	//LOGIN
-	
+
+	// LOGIN
+/*
 	@GetMapping("/login")
 	public String procesarLogin(Authentication aut, Model model, HttpSession misesion) {
-		
+
 		System.out.println("usuario : " + aut.getName());
 		Usuario usuario = uDao.verUsuario(aut.getName());
-		
+
 		if (misesion.getAttribute("usuario") == null)
 			misesion.setAttribute("usuario", usuario);
 		System.out.println();
-		
-		for (GrantedAuthority ele: aut.getAuthorities())
+
+		for (GrantedAuthority ele : aut.getAuthorities())
 			System.out.println("ROL : " + ele.getAuthority());
 		model.addAttribute("mensaje", aut.getAuthorities());
-		
+		model.addAttribute("usuario", misesion);
+
 		return "redirect:/";
 	}
+*/
 	
+<<<<<<< HEAD
 	
 	
 	//HOME
@@ -89,44 +91,66 @@ public class HomeController {
 	@GetMapping("/")
 	public String verIndex(Model model, Authentication aut, HttpSession misesion) {
 	    System.out.println(aut.getName() + "  -  " + aut.getAuthorities());
+=======
+	// ERROR
+>>>>>>> 26ba5d984fc287c46dc8b8edb07e35cf986592cb
 
-	    // Obtener eventos destacados
-	    List<Evento> destacados = eDao.verEventosDestacados();
-	    model.addAttribute("destacados", destacados);
+	@GetMapping("/error")
+	public String procesarError() {
 
-	    // Obtener eventos activos 
-	    List<Evento> activos = eDao.verEventosActivos();
-	    model.addAttribute("activos", activos);
+		System.out.println("procesar error");
 
+<<<<<<< HEAD
 	    // Obtener todos los tipos de eventos
 	    List<Tipo> tiposEvento = tDao.todosLosTiposEventos();
 	    model.addAttribute("TiposEvento", tiposEvento);
 
 	    return "Index";     
+=======
+		return "pruebas";
+>>>>>>> 26ba5d984fc287c46dc8b8edb07e35cf986592cb
 	}
-	
-	
+
+	// HOME
+
+	@GetMapping("/Index")
+	public String verIndex(Model model, Authentication aut, HttpSession misesion, @PathVariable("id") String username) {
+		System.out.println(aut.getName() + " - " + aut.getAuthorities());
+
+		// Obtener eventos destacados
+		List<Evento> destacados = eDao.verEventosDestacados();
+		model.addAttribute("destacados", destacados);
+
+		// Obtener eventos activos
+		List<Evento> activos = eDao.verEventosActivos();
+		model.addAttribute("activos", activos);
+
+		// Obtener todos los tipos de eventos
+		List<Tipo> tiposEvento = tDao.todosLosTiposEventos();
+		model.addAttribute("TiposEvento", tiposEvento);
+
+		model.addAttribute("usuario", misesion.getAttribute(username));
+
+		return "/";
+	}
+
 	@GetMapping("/EventosActivos")
 	public String verActivos(Model model, Authentication aut, HttpSession misesion) {
 
-	    // Obtener eventos activos 
-	    List<Evento> activos = eDao.verEventosActivos();
-	    model.addAttribute("activos", activos);
+		// Obtener eventos activos
+		List<Evento> activos = eDao.verEventosActivos();
+		model.addAttribute("activos", activos);
 
-	    return "EventosActivos";     
+		return "EventosActivos";
 	}
-	
-	
+
 	@GetMapping("/EventosDestacados")
 	public String verDestacados(Model model, Authentication aut, HttpSession misesion) {
 
-	    List<Evento> destacados = eDao.verEventosDestacados();
-	    model.addAttribute("destacados", destacados);
+		List<Evento> destacados = eDao.verEventosDestacados();
+		model.addAttribute("destacados", destacados);
 
-	    return "EventosDestacados";     
+		return "EventosDestacados";
 	}
-	
-	
-
 
 }
