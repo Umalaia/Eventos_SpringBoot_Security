@@ -7,7 +7,7 @@
 </head>
 <body>
 	<header>
-		<img src="img/Logo.png"/>
+		<img id="logo" src="img/Logo.png"/>
 		<h1>Eventos</h1>
 		<button>
 			<a th:href="@{/EventosDestacados}">Destacados</a>
@@ -35,6 +35,7 @@
 		</button>
 	</header>
 	<section>
+		<h3>Bienvenido : <span th:text="${usuario}"></span></h3>
 		<h2>Listado de Eventos Destacados</h2>
 		<table border="1">
 			<tr>

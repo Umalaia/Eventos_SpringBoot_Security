@@ -101,6 +101,8 @@ public class HomeController {
 	    // Obtener todos los tipos de eventos
 	    List<Tipo> tiposEvento = tDao.todosLosTiposEventos();
 	    model.addAttribute("TiposEvento", tiposEvento);
+	    
+	    model.addAttribute("usuario", misesion);
 
 	    return "Index";     
 	}
