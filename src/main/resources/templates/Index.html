@@ -35,7 +35,7 @@
 		</button>
 	</header>
 	<section>
-		<h3>Bienvenido : <span th:text="${usuario}"></span></h3>
+		<h3>Bienvenido : <span th:text="${session.usuario == null ? 'Anónimo' : session.usuario.nombre}"></span></h3>
 		<h2>Listado de Eventos Destacados</h2>
 		<table border="1">
 			<tr>
