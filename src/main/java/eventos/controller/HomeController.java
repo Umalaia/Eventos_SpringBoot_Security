@@ -83,14 +83,32 @@ public class HomeController {
 	}
 */
 	
+<<<<<<< HEAD
+	
+	
+	//HOME
+	
+	@GetMapping("/")
+	public String verIndex(Model model, Authentication aut, HttpSession misesion) {
+	    System.out.println(aut.getName() + "  -  " + aut.getAuthorities());
+=======
 	// ERROR
+>>>>>>> 26ba5d984fc287c46dc8b8edb07e35cf986592cb
 
 	@GetMapping("/error")
 	public String procesarError() {
 
 		System.out.println("procesar error");
 
+<<<<<<< HEAD
+	    // Obtener todos los tipos de eventos
+	    List<Tipo> tiposEvento = tDao.todosLosTiposEventos();
+	    model.addAttribute("TiposEvento", tiposEvento);
+
+	    return "Index";     
+=======
 		return "pruebas";
+>>>>>>> 26ba5d984fc287c46dc8b8edb07e35cf986592cb
 	}
 
 	// HOME

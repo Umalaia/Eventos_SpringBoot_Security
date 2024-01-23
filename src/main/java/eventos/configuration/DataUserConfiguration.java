@@ -39,6 +39,22 @@ public class DataUserConfiguration {
 	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 		http.csrf(csrf -> csrf.disable());
 		// Los recursos estáticos no requieren autenticación
+<<<<<<< HEAD
+		http.authorizeHttpRequests(authorize -> authorize
+			.requestMatchers("static/**").permitAll()
+			// Las vistas públicas no requieren autenticación
+			.requestMatchers("/registro", "/", "/Index" , "/EventosDestacados", "/EventosActivos" ,"/login", "/logout", "/eventos/verUno/**").permitAll()
+			//.requestMatchers("/eventos/activos", "/eventos/destacados").permitAll()
+			.requestMatchers("/rest/encriptar/**").permitAll()
+			// Todas las demás URLs de la Aplicación requieren autenticación
+			// Asignar permisos a URLs por ROLES
+			.requestMatchers("/eventos/**").hasAnyAuthority("ROLE_CLIENTE") 
+			.requestMatchers("/reservas/**").hasAnyAuthority("ROLE_CLIENTE") 
+			
+			.anyRequest().authenticated())
+		// El formulario de Login no requiere autenticacion
+		.formLogin(form -> form.permitAll());
+=======
 		http.authorizeHttpRequests(authorize -> authorize.requestMatchers("static/**").permitAll()
 				// Las vistas públicas no requieren autenticación
 				.requestMatchers("/signup", "/", "/Index", "/EventosDestacados", "/EventosActivos", "/login", "/logout",
@@ -54,6 +70,7 @@ public class DataUserConfiguration {
 				.anyRequest().authenticated())
 				// El formulario de Login no requiere autenticacion
 				.formLogin(form -> form.permitAll());
+>>>>>>> 26ba5d984fc287c46dc8b8edb07e35cf986592cb
 		return http.build();
 	}
 
