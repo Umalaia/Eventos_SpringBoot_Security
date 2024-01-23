@@ -6,8 +6,20 @@
 <link rel="stylesheet" type="text/css" th:href="@{css/Index.css}">
 </head>
 <body>
-<main>
-<h2>Listado de Eventos Activos</h2>
+	<header>
+		<nav id="nav">
+			<div id="cont_logo">
+				<img id="logo" src="img/Logo.png" />
+			</div>
+			<div id="botones">
+				<button id="volver">
+					<a th:href="@{/}">Volver a inicio</a>
+				</button>
+			</div>
+		</nav>
+	</header>
+	<main>
+		<h2>Listado de Eventos Activos</h2>
 		<table border="1">
 			<tr>
 				<th>Nombre</th>
@@ -19,11 +31,10 @@
 				<td th:text="${activo.descripcion}"></td>
 				<td th:text="${activo.aforoMaximo}"></td>
 				<td th:text="${activo.fechaInicio}"></td>
-				<td><a th:href="@{EventosActivos/verDetalles/{id}(id=${activo.idEvento})}">Detalles</a></td>
+				<td><a
+					th:href="@{EventosActivos/verDetalles/{id}(id=${activo.idEvento})}">Detalles</a></td>
 			</tr>
 		</table>
-		<br>
-		<button><a th:href="@{/}">Volver a inicio</a></button>
-</main>
+	</main>
 </body>
 </html>

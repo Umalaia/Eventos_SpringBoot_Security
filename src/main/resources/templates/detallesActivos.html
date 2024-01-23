@@ -6,6 +6,18 @@
 <link rel="stylesheet" type="text/css" th:href="@{css/Index.css}">
 </head>
 <body>
+	<header>
+		<nav id="nav">
+			<div id="cont_logo">
+				<img id="logo" src="img/Logo.png" />
+			</div>
+			<div id="botones">
+				<button id="volver">
+					<a th:href="@{/}">Volver a inicio</a>
+				</button>
+			</div>
+		</nav>
+	</header>
 <main>
 	<h1>Detalles del evento activo</h1>
 	<table border="1">
@@ -32,10 +44,6 @@
 			<td th:text="${evento.precio}"></td>
 		</tr>
 	</table>
-	<br>
-	<button>
-		<a th:href="@{/}">Volver a inicio</a>
-	</button>
 </main>
 </body>
 </html>

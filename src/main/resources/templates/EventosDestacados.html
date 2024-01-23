@@ -6,6 +6,18 @@
 <link rel="stylesheet" type="text/css" th:href="@{css/Index.css}">
 </head>
 <body>
+	<header>
+		<nav id="nav">
+			<div id="cont_logo">
+				<img id="logo" src="img/Logo.png" />
+			</div>
+			<div id="botones">
+				<button id="volver">
+					<a th:href="@{/}">Volver a inicio</a>
+				</button>
+			</div>
+		</nav>
+	</header>
 <main>
 <h2>Listado de Eventos Destacados</h2>
 		<table border="1">
@@ -22,8 +34,6 @@
 				<td><a th:href="@{EventosDestacados/verDetalles/{id}(id=${destacado.idEvento})}">Detalles</a></td>
 			</tr>
 		</table>
-		<br>
-		<button><a th:href="@{/}">Volver a inicio</a></button>
 </main>
 </body>
 </html>

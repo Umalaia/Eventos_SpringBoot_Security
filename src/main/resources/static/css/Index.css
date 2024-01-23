@@ -15,6 +15,11 @@ h1 {
 	font-family: calistoga;
 }
 
+h2 {
+	color: #000040;
+	font-family: calistoga;
+}
+
 nav {
 	background: white;
 }
@@ -23,6 +28,11 @@ nav {
 	display: flex;
 	align-content: center;
 	align-items: center;
+}
+
+#volver {
+	margin-left: 60%;
+	
 }
 
 #logo {

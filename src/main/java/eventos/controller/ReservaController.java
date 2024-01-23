@@ -18,6 +18,8 @@ public class ReservaController {
 	@Autowired
 	private ReservaDao rDao;
 	
+	
+	//DE MOMENTO DEJO MOSTRAR TODAS LAS RESERVAS, PERO HAY QUE SACARLAS POR EL USUARIO LOGEADO
 	@GetMapping("/misReservas")
 	public String verMisReservas(Model model,  Authentication aut, HttpSession misesion) {
 		List<Reserva> reservas = rDao.verReservas();
