@@ -32,7 +32,7 @@
 					<option th:value="Teatro" th:text="Teatro"></option>
 				</select>
 				<button>
-					<a th:href="@{/reservas}">Mis reservas</a>
+					<a th:href="@{/misReservas}">Mis reservas</a>
 				</button>
 				<button>
 					<a th:href="@{/Login}">Login</a>
@@ -46,30 +46,33 @@
 			</div>
 		</nav>
 	</header>
-	<section id="seccion">
-		<div id="listado">
-		<h2>Listado de Eventos Destacados</h2>
-		<table border="1">
-			<tr>
-				<th>Nombre</th>
-				<th>Aforo</th>
-				<th>Fecha inicio</th>
-				<th>Opciones</th>
-			</tr>
-			<tr th:each="destacado : ${destacados}">
-				<td th:text="${destacado.descripcion}"></td>
-				<td th:text="${destacado.aforoMaximo}"></td>
-				<td th:text="${destacado.fechaInicio}"></td>
-				<td><a th:href="@{/verDetalles/{id}(id=${destacado.idEvento})}">Detalles</a></td>
-			</tr>
-		</table>
-		</div>
+	<main>
+		<section id="seccion">
+			<div id="listado">
+				<h2>Listado de Eventos Destacados</h2>
+				<table border="1">
+					<tr>
+						<th>Nombre</th>
+						<th>Aforo</th>
+						<th>Fecha inicio</th>
+						<th>Opciones</th>
+					</tr>
+					<tr th:each="destacado : ${destacados}">
+						<td th:text="${destacado.descripcion}"></td>
+						<td th:text="${destacado.aforoMaximo}"></td>
+						<td th:text="${destacado.fechaInicio}"></td>
+						<td><a
+							th:href="@{/verDetalles/{id}(id=${destacado.idEvento})}">Detalles</a></td>
+					</tr>
+				</table>
+			</div>
 			<div id="bienvenido">
-		<h3>
-			Bienvenido : <span th:text="${usuario == null ? 'Anónimo' : usuario}"></span>
-		</h3>
-		</div>
-	</section>
-
+				<h3>
+					Bienvenido : <span
+						th:text="${usuario == null ? 'Anónimo' : usuario}"></span>
+				</h3>
+			</div>
+		</section>
+	</main>
 </body>
 </html>
