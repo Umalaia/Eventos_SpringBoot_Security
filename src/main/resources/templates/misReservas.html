@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Mis reservas</title>
-<link rel="stylesheet" type="text/css" th:href="@{css/Index.css}">
+<link rel="stylesheet" type="text/css" th:href="@{../../css/Index.css}">
 </head>
 <body>
 	<header>
@@ -23,21 +23,21 @@
 	<table border="1">
 		<tr>
 			<th>Evento</th>
-			<th>Estado</th>
+			<th>Fecha de inicio</th>
 			<th>Cantidad</th>
-			<th>Observaciones</th>
 			<th>Precio de venta</th>
-			<th>Eliminar reserva</th>
+			<th>Cancelar reserva</th>
 		</tr>
 		<tr th:each="reserva : ${reservas}">
 			<td th:text="${reserva.evento.descripcion}"></td>
-			<td th:text="${reserva.evento.estado}"></td>
+			<td th:text="${reserva.evento.fechaInicio}"></td>
 			<td th:text="${reserva.cantidad}"></td>
-			<td th:text="${reserva.observaciones}"></td>
 			<td th:text="${reserva.precioVenta}"></td>
-			<td><a th:href="@{/misReservas/eliminar/{id}(id=${reserva.idReserva})}">Eliminar</a></td>
+			<td><a th:href="@{/misReservas/eliminar/{id}(id=${reserva.idReserva})}">Cancelar</a></td>
 		</tr>
 	</table>
+	<br><br>
+		<h2 th:text="${mensaje}"></h2>
 </main>
 </body>
 </html>

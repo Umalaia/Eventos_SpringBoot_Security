@@ -99,7 +99,7 @@ public class HomeController {
 
 		model.addAttribute("usuario", misesion.getAttribute(username));
 
-		return "/";
+		return "Index";
 	}
 
 	@GetMapping("/EventosActivos")

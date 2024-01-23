@@ -3,13 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <title>Detalle evento destacado</title>
-<link rel="stylesheet" type="text/css" th:href="@{../css/Index.css}">
+<link rel="stylesheet" type="text/css" th:href="@{../../css/Index.css}">
 </head>
 <body>
 	<header>
 		<nav id="nav">
 			<div id="cont_logo">
-				<img id="logo" src="img/Logo.png" />
+				<img id="logo" src="../../img/Logo.png" />
 			</div>
 			<div id="botones">
 				<button id="volver">
@@ -19,7 +19,7 @@
 		</nav>
 	</header>
 <main>
-	<h1>Detalles del evento destacado</h1>
+	<h1>Detalle del evento destacado seleccionado</h1>
 	<table border="1">
 		<tr>
 			<th>Nombre</th>
@@ -27,7 +27,6 @@
 			<th>Aforo</th>
 			<th>Dirección</th>
 			<th>Duración</th>
-			<th>Estado</th>
 			<th>Fecha de inicio</th>
 			<th>Mínimo asistencia</th>
 			<th>Precio</th>
@@ -38,7 +37,6 @@
 			<td th:text="${evento.aforoMaximo}"></td>
 			<td th:text="${evento.direccion}"></td>
 			<td th:text="${evento.duracion}"></td>
-			<td th:text="${evento.estado}"></td>
 			<td th:text="${evento.fechaInicio}"></td>
 			<td th:text="${evento.minimoAsistencia}"></td>
 			<td th:text="${evento.precio}"></td>

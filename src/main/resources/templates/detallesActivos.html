@@ -3,13 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <title>Detalle evento activo</title>
-<link rel="stylesheet" type="text/css" th:href="@{css/Index.css}">
+<link rel="stylesheet" type="text/css" th:href="@{../../css/Index.css}">
 </head>
 <body>
 	<header>
 		<nav id="nav">
 			<div id="cont_logo">
-				<img id="logo" src="img/Logo.png" />
+				<img id="logo" src="../../img/Logo.png" />
 			</div>
 			<div id="botones">
 				<button id="volver">
@@ -18,32 +18,45 @@
 			</div>
 		</nav>
 	</header>
-<main>
-	<h1>Detalles del evento activo</h1>
-	<table border="1">
-		<tr>
-			<th>Nombre</th>
-			<th>Descripción</th>
-			<th>Aforo</th>
-			<th>Dirección</th>
-			<th>Duración</th>
-			<th>Destacado</th>
-			<th>Fecha de inicio</th>
-			<th>Mínimo asistencia</th>
-			<th>Precio</th>
-		</tr>
-		<tr>
-			<td th:text="${evento.nombre}"></td>
-			<td th:text="${evento.descripcion}"></td>
-			<td th:text="${evento.aforoMaximo}"></td>
-			<td th:text="${evento.direccion}"></td>
-			<td th:text="${evento.duracion}"></td>
-			<td th:text="${evento.destacado}"></td>
-			<td th:text="${evento.fechaInicio}"></td>
-			<td th:text="${evento.minimoAsistencia}"></td>
-			<td th:text="${evento.precio}"></td>
-		</tr>
-	</table>
-</main>
+	<main>
+		<h1>Detalle del evento activo seleccionado</h1>
+		<table border="1">
+			<tr>
+				<th>Nombre</th>
+				<th>Descripción</th>
+				<th>Aforo</th>
+				<th>Dirección</th>
+				<th>Duración</th>
+				<th>Fecha de inicio</th>
+				<th>Mínimo asistencia</th>
+				<th>Precio</th>
+			</tr>
+			<tr>
+				<td th:text="${evento.nombre}"></td>
+				<td th:text="${evento.descripcion}"></td>
+				<td th:text="${evento.aforoMaximo}"></td>
+				<td th:text="${evento.direccion}"></td>
+				<td th:text="${evento.duracion}"></td>
+				<td th:text="${evento.fechaInicio}"></td>
+				<td th:text="${evento.minimoAsistencia}"></td>
+				<td th:text="${evento.precio}"></td>
+			</tr>
+		</table>
+		<section>
+			<article>
+				<h3>
+					Quedan : <span></span>
+				</h3>
+			</article>
+			<article>
+				<label>Cantidad</label>
+				<input type="number" min="1" max="10" step="1" />
+				
+			</article>
+			<br>
+			<button>Reservar</button>
+
+		</section>
+	</main>
 </body>
 </html>
