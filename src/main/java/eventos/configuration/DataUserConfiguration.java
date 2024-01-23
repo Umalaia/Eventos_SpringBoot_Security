@@ -47,7 +47,7 @@ public class DataUserConfiguration{
 		http.authorizeHttpRequests(authorize -> authorize
 			.requestMatchers("static/**").permitAll()
 			// Las vistas públicas no requieren autenticación
-			.requestMatchers("/Registro", "/", "/Index" , "/EventosDestacados", "/EventosActivos" ,"/Login", "/Logout", "/eventos/verUno/**").permitAll()
+			.requestMatchers("/signup", "/", "/Index" , "/EventosDestacados", "/EventosActivos" ,"/login", "/logout", "/eventos/verUno/**").permitAll()
 			//.requestMatchers("/eventos/activos", "/eventos/destacados").permitAll()
 			.requestMatchers("/rest/encriptar/**").permitAll()
 			// Todas las demás URLs de la Aplicación requieren autenticación
