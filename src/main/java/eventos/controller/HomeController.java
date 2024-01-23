@@ -86,7 +86,7 @@ public class HomeController {
 	
 	//HOME
 	
-	@GetMapping("/Index")
+	@GetMapping("/")
 	public String verIndex(Model model, Authentication aut, HttpSession misesion) {
 	    System.out.println(aut.getName() + "  -  " + aut.getAuthorities());
 
@@ -101,8 +101,6 @@ public class HomeController {
 	    // Obtener todos los tipos de eventos
 	    List<Tipo> tiposEvento = tDao.todosLosTiposEventos();
 	    model.addAttribute("TiposEvento", tiposEvento);
-	    
-	    model.addAttribute("usuario", misesion);
 
 	    return "Index";     
 	}
