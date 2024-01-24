@@ -6,6 +6,7 @@ public interface UsuarioDao {
 	
 	Usuario verUsuario(String username);
 	boolean registro(Usuario usuario);
+	Usuario UsuarioYpass(String username, String password);
 	
 
 }

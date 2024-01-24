@@ -27,4 +27,11 @@ public class UsuarioDaoImpl implements UsuarioDao{
 	return false;
 }
 
+
+	@Override
+	public Usuario UsuarioYpass(String username, String password) {
+		return uRepo.findByUserAndPass(username, password);
+	}
+
+
 }

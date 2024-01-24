@@ -9,7 +9,7 @@
 	<main>
 		<h1>Iniciar sesión</h1>
 		<h2 th:text="${mensaje}"></h2>
-		<form th:action="@{/signup}" method="post" th:object="${usuario}">
+		<form th:action="@{/login}" method="post" th:object="${usuario}">
 			<input type="text" th:field="*{username}" placeholder="Username">
 			<input type="text" th:field="*{password}" placeholder="Contraseña">
 			<button type="submit">Iniciar sesión</button>
