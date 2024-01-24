@@ -101,6 +101,10 @@ button :hover{
 
 }
 
+a{
+	color: #029ffd;
+}
+
 select {
 	color: #030b67;
 	background: #ebfbfe;

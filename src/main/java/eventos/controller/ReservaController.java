@@ -30,8 +30,9 @@ public class ReservaController {
 	
 	//DE MOMENTO DEJO MOSTRAR TODAS LAS RESERVAS, PERO HAY QUE SACARLAS POR EL USUARIO LOGEADO
 	@GetMapping("/misReservas")
-	public String verMisReservas(Model model, Authentication aut, HttpSession misesion) {
-		List<Reserva> reservas = rDao.verReservas();
+	public String verMisReservas(Model model, Authentication aut, HttpSession misesion, Usuario usuario) {
+		Usuario user = uDao.verUsuario(usuario.getUsername());
+		List<Reserva> reservas = rDao.verReservasPorUsuario(user);
 		model.addAttribute("reservas", reservas);
 		return "misReservas";
 	}

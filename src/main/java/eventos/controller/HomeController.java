@@ -68,7 +68,7 @@ public class HomeController {
 	// LOGIN
 
 	@GetMapping("/login")
-	public String procesarLogin(Authentication aut, Model model, HttpSession misesion, Usuario usuario) {
+	public String procesarLogin(Authentication aut, Model model, HttpSession misesion,Usuario usuario) {
 		model.addAttribute("usuario", usuario);
 		return "login";
 	}
@@ -103,6 +103,7 @@ public class HomeController {
 		model.addAttribute("TiposEvento", tiposEvento);
 
 		model.addAttribute("usuario", usuario.getNombre());
+
 
 		return "home";
 	}
