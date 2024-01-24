@@ -54,7 +54,7 @@ public class HomeController {
 		usuario.setPassword("{noop}" + usuario.getPassword());
 		if (uDao.registro(usuario)) {
 			ratt.addFlashAttribute("mensaje", "alta usuario realizada");
-			return "redirect:/Login";
+			return "redirect:/login";
 		} else {
 			model.addAttribute("mensaje", "ya existe como usuario");
 			return "/Registro";

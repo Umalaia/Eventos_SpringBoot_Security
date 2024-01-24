@@ -29,6 +29,7 @@ public class DataUserConfiguration {
 
 	}
 
+	
 	@Bean
 	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 		http.csrf(csrf -> csrf.disable());
@@ -36,14 +37,13 @@ public class DataUserConfiguration {
 
 		http.authorizeHttpRequests(authorize -> authorize.requestMatchers("static/**").permitAll()
 				// Las vistas públicas no requieren autenticación
-				.requestMatchers("/signup", "/", "/Index", "/EventosDestacados", "/EventosActivos", "/login", "/logout",
-						"/eventos/verUno/**")
-				.permitAll().requestMatchers("/eventos/activos", "/eventos/destacados").permitAll()
+				.requestMatchers("/", "/Index", "/EventosDestacados", "/EventosActivos", "/signup", "/login", "/logout").permitAll()
+				.requestMatchers("EventosActivos/verDetalles/**", "EventosDestacados/verDetalles/**").permitAll()
 				.requestMatchers("/rest/encriptar/**").permitAll()
 				// Todas las demás URLs de la Aplicación requieren autenticación
 				// Asignar permisos a URLs por ROLES
-				.requestMatchers("/eventos/**").hasAnyAuthority("ROLE_CLIENTE").requestMatchers("/reservas/**")
-				.hasAnyAuthority("ROLE_CLIENTE")
+				.requestMatchers("/eventos/**").hasAnyAuthority("ROLE_CLIENTE")
+				.requestMatchers("/reservas/**").hasAnyAuthority("ROLE_CLIENTE")
 
 				.anyRequest().authenticated())
 				// El formulario de Login no requiere autenticacion
