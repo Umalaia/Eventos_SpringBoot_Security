@@ -28,13 +28,18 @@ public class ReservaController {
 	private UsuarioDao uDao;
 	
 	
-	//DE MOMENTO DEJO MOSTRAR TODAS LAS RESERVAS, PERO HAY QUE SACARLAS POR EL USUARIO LOGEADO
 	@GetMapping("/misReservas")
 	public String verMisReservas(Model model, Authentication aut, HttpSession misesion, Usuario usuario) {
-		Usuario user = uDao.verUsuario(usuario.getUsername());
-		List<Reserva> reservas = rDao.verReservasPorUsuario(user);
-		model.addAttribute("reservas", reservas);
-		return "misReservas";
+	    if (aut != null && aut.isAuthenticated()) {
+	        String nombreUsuario = aut.getName();
+
+	        Usuario user = uDao.verUsuario(nombreUsuario);
+	        List<Reserva> reservas = rDao.verReservasPorUsuario(user);
+	        model.addAttribute("reservas", reservas);
+	        return "misReservas";
+	    } else {
+	        return "redirect:/login";
+	    }
 	}
 	
 	@GetMapping("/misReservas/eliminar/{id}")

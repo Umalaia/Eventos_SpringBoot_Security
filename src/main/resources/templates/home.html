@@ -61,15 +61,18 @@
 						<td th:text="${destacado.descripcion}"></td>
 						<td th:text="${destacado.aforoMaximo}"></td>
 						<td th:text="${destacado.fechaInicio}"></td>
-						<td><a
-							th:href="@{/detalles/{id}(id=${destacado.idEvento})}">Detalles</a></td>
+						<td><a th:href="@{/detalles/{id}(id=${destacado.idEvento})}">Detalles</a></td>
 					</tr>
 				</table>
 			</div>
 			<div id="bienvenido">
-				<h3>Bienvenido : <span th:text="${usuario == null ? 'Anónimo' : usuario}"></span>
+				<h3 th:if="${#authorization.expression('isAuthenticated()')}">
+					Bienvenido, <span th:text="${#authentication.principal.username}"></span>
 				</h3>
+				<h3 th:unless="${#authorization.expression('isAuthenticated()')}">
+					¡Inicia sesión para acceder a más funciones!</h3>
 			</div>
+
 		</section>
 	</main>
 </body>

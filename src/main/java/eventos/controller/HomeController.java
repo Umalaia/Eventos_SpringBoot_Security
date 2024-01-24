@@ -69,7 +69,7 @@ public class HomeController {
 
 	@GetMapping("/login")
 	public String procesarLogin(Authentication aut, Model model, HttpSession misesion,Usuario usuario) {
-		model.addAttribute("usuario", usuario);
+		misesion.setAttribute("usuario", usuario);
 		return "login";
 	}
 	
@@ -79,9 +79,11 @@ public class HomeController {
 			HttpSession misesion, RedirectAttributes ratt) {
 		Usuario usuario = uDao.UsuarioYpass(username, password);
 		if(usuario != null) {
-			usuario.setPassword(null);
-			misesion.setAttribute("usuario", usuario);
-			return "redirect:/home";
+		    usuario.setPassword(null);
+		    usuario.setNombre(username); // Establecer el nombre utilizando el username
+		    misesion.setAttribute("usuario", usuario);
+		    return "redirect:/home";
+		
 		}
 		ratt.addFlashAttribute("mensaje", "Usuario o Password incorrecto");
 		return "redirect:/login";
