@@ -33,7 +33,7 @@ public class ReservaController {
 	public String verMisReservas(Model model, Authentication aut, HttpSession misesion) {
 		List<Reserva> reservas = rDao.verReservas();
 		model.addAttribute("reservas", reservas);
-		return "/misReservas";
+		return "misReservas";
 	}
 	
 	@GetMapping("/misReservas/eliminar/{id}")

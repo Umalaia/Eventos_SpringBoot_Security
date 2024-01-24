@@ -23,18 +23,25 @@ public class EventoController {
 	
 	//VER DETALLES
 	
+	@GetMapping("/detalles/{id}")
+	public String detallesEventos (@PathVariable ("id") int idEvento, Model model) {
+		Evento evento = eDao.verUnEvento(idEvento);
+		model.addAttribute("evento", evento);
+		return "detalles";
+	}
+	
 	@GetMapping("/eventosDestacados/verDetalles/{id}")
 	public String detallesEventosDestacados (@PathVariable ("id") int idEvento, Model model) {
 		Evento evento = eDao.verUnEvento(idEvento);
 		model.addAttribute("evento", evento);
-		return "/detallesDestacado";
+		return "detallesDestacado";
 	}
 	
 	@GetMapping("/eventosActivos/verDetalles/{id}")
 	public String detallesEventosActivos (@PathVariable ("id") int idEvento, Model model) {
 		Evento evento = eDao.verUnEvento(idEvento);
 		model.addAttribute("evento", evento);
-		return "/detallesActivos";
+		return "detallesActivos";
 	}
 	
 	
@@ -42,7 +49,7 @@ public class EventoController {
 	
 	@GetMapping("/eventosDestacados/verDetalles/{id}/alta")
 	public String altaReservaDes(Model model, @PathVariable ("id") int idEvento) {
-		return "/detallesDestacado";
+		return "detallesDestacado";
 	}
 	
 	//FALTA POSTMAPPING
@@ -57,7 +64,7 @@ public class EventoController {
 	
 	@GetMapping("/eventosActivos/verDetalles/{id}/alta")
 	public String altaReservaAc(Model model, @PathVariable ("id") int idEvento) {
-		return "/detallesActivos";
+		return "detallesActivos";
 	}
 	
 	
