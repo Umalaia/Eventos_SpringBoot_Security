@@ -3,13 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <title>Eventos activos</title>
-<link rel="stylesheet" type="text/css" th:href="@{css/Index.css}">
+<link rel="stylesheet" type="text/css" th:href="@{/css/Index.css}">
 </head>
 <body>
 	<header>
 		<nav id="nav">
 			<div id="cont_logo">
-				<img id="logo" src="img/Logo.png" />
+				<img id="logo" src="/img/Logo.png" />
 			</div>
 			<div id="botones">
 				<button id="volver">
@@ -32,7 +32,7 @@
 				<td th:text="${activo.aforoMaximo}"></td>
 				<td th:text="${activo.fechaInicio}"></td>
 				<td><a
-					th:href="@{EventosActivos/verDetalles/{id}(id=${activo.idEvento})}">Detalles</a></td>
+					th:href="@{eventosActivos/verDetalles/{id}(id=${activo.idEvento})}">Detalles</a></td>
 			</tr>
 		</table>
 	</main>

@@ -39,7 +39,7 @@ public class HomeController {
 	@GetMapping("/signup")
 	public String registrar(Model model) {
 		model.addAttribute("usuario", new Usuario());
-		return "Registro";
+		return "registro";
 	}
 
 	@PostMapping("/signup")
@@ -53,16 +53,24 @@ public class HomeController {
 			return "redirect:/login";
 		} else {
 			model.addAttribute("mensaje", "Ya existe como usuario");
-			return "/Registro";
+			return "redirect:/signup";
 		}
 	}
+	
+	//CERRAR SESIÓN
+	
+	@GetMapping("/signout")
+	public String cerrarSesion(Model model) {
+		return "redirect:/";
+	}
+	
 
 	// LOGIN
 
 	@GetMapping("/login")
 	public String procesarLogin(Authentication aut, Model model, HttpSession misesion, Usuario usuario) {
 		model.addAttribute("usuario", usuario);
-		return "/login";
+		return "login";
 	}
 	
 	
@@ -73,17 +81,17 @@ public class HomeController {
 		if(usuario != null) {
 			usuario.setPassword(null);
 			misesion.setAttribute("usuario", usuario);
-			return "redirect:/Index";
+			return "redirect:/home";
 		}
 		ratt.addFlashAttribute("mensaje", "Usuario o Password incorrecto");
-		return "redirect:/Index";
+		return "redirect:/login";
 	}
 
 
 	// HOME
 
-	@GetMapping("/Index")
-	public String verIndex(Model model, Authentication aut, HttpSession misesion, @PathVariable("id") String username) {
+	@GetMapping({"/", "/home"})
+	public String verIndex(Model model, Authentication aut, HttpSession misesion, Usuario usuario) {
 		System.out.println(aut.getName() + " - " + aut.getAuthorities());
 		
 		// Obtener eventos destacados
@@ -94,29 +102,40 @@ public class HomeController {
 		List<Tipo> tiposEvento = tDao.todosLosTiposEventos();
 		model.addAttribute("TiposEvento", tiposEvento);
 
-		model.addAttribute("usuario", misesion.getAttribute(username));
+		model.addAttribute("usuario", usuario.getNombre());
 
-		return "/";
+		return "home";
 	}
 
 	
-	@GetMapping("/EventosActivos")
+	
+	@GetMapping("/eventosActivos")
 	public String verActivos(Model model, Authentication aut, HttpSession misesion) {
 
 		// Obtener eventos activos
 		List<Evento> activos = eDao.verEventosActivos();
 		model.addAttribute("activos", activos);
 
-		return "EventosActivos";
+		return "eventosActivos";
 	}
 
-	@GetMapping("/EventosDestacados")
+	@GetMapping("/eventosDestacados")
 	public String verDestacados(Model model, Authentication aut, HttpSession misesion) {
 
 		List<Evento> destacados = eDao.verEventosDestacados();
 		model.addAttribute("destacados", destacados);
 
-		return "EventosDestacados";
+		return "eventosDestacados";
+	}
+	
+	
+	@GetMapping("/detalles")
+	public String verDetalles(Model model, Authentication aut, HttpSession misesion) {
+
+		List<Evento> destacados = eDao.verEventosDestacados();
+		model.addAttribute("destacados", destacados);
+
+		return "detalles";
 	}
 
 }

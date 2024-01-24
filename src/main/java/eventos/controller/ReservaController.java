@@ -9,10 +9,13 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import eventos.modelo.dao.ReservaDao;
+import eventos.modelo.dao.UsuarioDao;
 import eventos.modelo.entitis.Reserva;
+import eventos.modelo.entitis.Usuario;
 import jakarta.servlet.http.HttpSession;
 
 @Controller
@@ -20,6 +23,9 @@ public class ReservaController {
 	
 	@Autowired
 	private ReservaDao rDao;
+	
+	@Autowired
+	private UsuarioDao uDao;
 	
 	
 	//DE MOMENTO DEJO MOSTRAR TODAS LAS RESERVAS, PERO HAY QUE SACARLAS POR EL USUARIO LOGEADO

@@ -23,14 +23,14 @@ public class EventoController {
 	
 	//VER DETALLES
 	
-	@GetMapping("/EventosDestacados/verDetalles/{id}")
+	@GetMapping("/eventosDestacados/verDetalles/{id}")
 	public String detallesEventosDestacados (@PathVariable ("id") int idEvento, Model model) {
 		Evento evento = eDao.verUnEvento(idEvento);
 		model.addAttribute("evento", evento);
 		return "/detallesDestacado";
 	}
 	
-	@GetMapping("/EventosActivos/verDetalles/{id}")
+	@GetMapping("/eventosActivos/verDetalles/{id}")
 	public String detallesEventosActivos (@PathVariable ("id") int idEvento, Model model) {
 		Evento evento = eDao.verUnEvento(idEvento);
 		model.addAttribute("evento", evento);
@@ -40,14 +40,14 @@ public class EventoController {
 	
 	//ALTA 
 	
-	@GetMapping("/EventosDestacados/verDetalles/{id}/alta")
+	@GetMapping("/eventosDestacados/verDetalles/{id}/alta")
 	public String altaReservaDes(Model model, @PathVariable ("id") int idEvento) {
 		return "/detallesDestacado";
 	}
 	
 	//FALTA POSTMAPPING
 	
-	@PostMapping("/EventosDestacados/verDetalles/{id}/alta")
+	@PostMapping("/eventosDestacados/verDetalles/{id}/alta")
 	public String postAltaReservaDes(RedirectAttributes ratt) {
 		
 		ratt.addFlashAttribute("mensaje", "Reserva realizada con éxito");
@@ -55,7 +55,7 @@ public class EventoController {
 	}
 	
 	
-	@GetMapping("/EventosActivos/verDetalles/{id}/alta")
+	@GetMapping("/eventosActivos/verDetalles/{id}/alta")
 	public String altaReservaAc(Model model, @PathVariable ("id") int idEvento) {
 		return "/detallesActivos";
 	}
@@ -63,7 +63,7 @@ public class EventoController {
 	
 	//FALTA POSTMAPPING
 	
-	@PostMapping("/EventosActivos/verDetalles/{id}/alta")
+	@PostMapping("/eventosActivos/verDetalles/{id}/alta")
 	public String postAltaReservaAct(RedirectAttributes ratt) {
 		
 		ratt.addFlashAttribute("mensaje", "Reserva realizada con éxito");

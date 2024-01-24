@@ -3,20 +3,20 @@
 <head>
 <meta charset="UTF-8">
 <title>Index</title>
-<link rel="stylesheet" type="text/css" th:href="@{css/Index.css}">
+<link rel="stylesheet" type="text/css" th:href="@{/css/Index.css}">
 </head>
 <body>
 	<header>
 		<nav id="nav">
 			<div id="cont_logo">
-				<img id="logo" src="img/Logo.png" />
+				<img id="logo" src="/img/Logo.png" />
 			</div>
 			<div id="botones">
 				<button>
-					<a th:href="@{/EventosDestacados}">Eventos Destacados</a>
+					<a th:href="@{/eventosDestacados}">Eventos Destacados</a>
 				</button>
 				<button>
-					<a th:href="@{/EventosActivos}">Eventos Activos</a>
+					<a th:href="@{/eventosActivos}">Eventos Activos</a>
 				</button>
 				<select>
 					<option>Tipos de eventos</option>
@@ -62,7 +62,7 @@
 						<td th:text="${destacado.aforoMaximo}"></td>
 						<td th:text="${destacado.fechaInicio}"></td>
 						<td><a
-							th:href="@{/verDetalles/{id}(id=${destacado.idEvento})}">Detalles</a></td>
+							th:href="@{/detalles/{id}(id=${destacado.idEvento})}">Detalles</a></td>
 					</tr>
 				</table>
 			</div>

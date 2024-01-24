@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
-<title>Detalle evento activo</title>
+<title>Detalles evento</title>
 <link rel="stylesheet" type="text/css" th:href="@{/css/Index.css}">
 </head>
 <body>
@@ -18,30 +18,30 @@
 			</div>
 		</nav>
 	</header>
-	<main>
-		<h1>Detalle del evento activo seleccionado</h1>
-		<table border="1">
-			<tr>
-				<th>Nombre</th>
-				<th>Descripción</th>
-				<th>Aforo</th>
-				<th>Dirección</th>
-				<th>Duración</th>
-				<th>Fecha de inicio</th>
-				<th>Mínimo asistencia</th>
-				<th>Precio</th>
-			</tr>
-			<tr>
-				<td th:text="${evento.nombre}"></td>
-				<td th:text="${evento.descripcion}"></td>
-				<td th:text="${evento.aforoMaximo}"></td>
-				<td th:text="${evento.direccion}"></td>
-				<td th:text="${evento.duracion}"></td>
-				<td th:text="${evento.fechaInicio}"></td>
-				<td th:text="${evento.minimoAsistencia}"></td>
-				<td th:text="${evento.precio}"></td>
-			</tr>
-		</table>
+<main>
+	<h1>Detalle del evento seleccionado</h1>
+	<table border="1">
+		<tr>
+			<th>Nombre</th>
+			<th>Descripción</th>
+			<th>Aforo</th>
+			<th>Dirección</th>
+			<th>Duración</th>
+			<th>Fecha de inicio</th>
+			<th>Mínimo asistencia</th>
+			<th>Precio</th>
+		</tr>
+		<tr>
+			<td th:text="${evento.nombre}"></td>
+			<td th:text="${evento.descripcion}"></td>
+			<td th:text="${evento.aforoMaximo}"></td>
+			<td th:text="${evento.direccion}"></td>
+			<td th:text="${evento.duracion}"></td>
+			<td th:text="${evento.fechaInicio}"></td>
+			<td th:text="${evento.minimoAsistencia}"></td>
+			<td th:text="${evento.precio}"></td>
+		</tr>
+	</table>
 		<section>
 			<article>
 				<h3>
@@ -56,6 +56,7 @@
 			<br>
 			<button><a th:href="@{/misReservas}">Reservar</a></button>
 		</section>
-	</main>
+</main>
+
 </body>
 </html>

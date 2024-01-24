@@ -36,13 +36,11 @@ public class DataUserConfiguration {
 
 		http.authorizeHttpRequests(authorize -> authorize.requestMatchers("static/**").permitAll()
 				// Las vistas públicas no requieren autenticación
-				.requestMatchers("/", "/Index", "/EventosDestacados", "/EventosActivos", "/signup", "/login", "/logout")
-				.permitAll().requestMatchers("EventosActivos/verDetalles/**", "EventosDestacados/verDetalles/**")
+				.requestMatchers("/", "/home", "/eventosDestacados", "/eventosActivos", "/signup", "/login", "/logout", "/detalles/**")
+				.permitAll().requestMatchers("/eventosActivos/verDetalles/**", "/eventosDestacados/verDetalles/**")
 				.permitAll().requestMatchers("/rest/encriptar/**").permitAll()
 				// Todas las demás URLs de la Aplicación requieren autenticación
 				// Asignar permisos a URLs por ROLES
-				.requestMatchers("/eventos/**").hasAnyAuthority("ROLE_CLIENTE").requestMatchers("/reservas/**")
-				.hasAnyAuthority("ROLE_CLIENTE")
 
 				.anyRequest().authenticated())
 				// El formulario de Login no requiere autenticacion
