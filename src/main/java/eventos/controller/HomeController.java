@@ -16,7 +16,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import eventos.modelo.dao.EventoDao;
 import eventos.modelo.dao.PerfilDao;
-import eventos.modelo.dao.ReservaDao;
 import eventos.modelo.dao.TipoDao;
 import eventos.modelo.dao.UsuarioDao;
 import eventos.modelo.entitis.Evento;
@@ -32,8 +31,6 @@ public class HomeController {
 	EventoDao eDao;
 	@Autowired
 	TipoDao tDao;
-	@Autowired
-	ReservaDao rDao;
 	@Autowired
 	PerfilDao pDao;
 
@@ -62,10 +59,10 @@ public class HomeController {
 
 	// LOGIN
 
-/*
 	@GetMapping("/login")
-	public String procesarLogin(Authentication aut, Model model, HttpSession misesion) {
-		return "login";
+	public String procesarLogin(Authentication aut, Model model, HttpSession misesion, Usuario usuario) {
+		model.addAttribute("usuario", usuario);
+		return "/login";
 	}
 	
 	
@@ -81,7 +78,7 @@ public class HomeController {
 		ratt.addFlashAttribute("mensaje", "Usuario o Password incorrecto");
 		return "redirect:/Index";
 	}
-*/
+
 
 	// HOME
 
