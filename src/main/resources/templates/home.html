@@ -66,12 +66,13 @@
 				</table>
 			</div>
 			<div id="bienvenido">
-				<h3 th:if="${#authorization.expression('isAuthenticated()')}">
-					Bienvenido, <span th:text="${#authentication.principal.username}"></span>
+				<h3 th:if="${#authentication.isAuthenticated()}">
+					Bienvenido, <span th:text="${#authentication.name}"></span>
 				</h3>
-				<h3 th:unless="${#authorization.expression('isAuthenticated()')}">
-					¡Inicia sesión para acceder a más funciones!</h3>
+				<h3 th:unless="${#authentication.isAuthenticated()}">¡Inicia
+					sesión para acceder a más funciones!</h3>
 			</div>
+
 
 		</section>
 	</main>
