@@ -47,7 +47,7 @@ public class DataUserConfiguration {
 
 				.anyRequest().authenticated())
 				// El formulario de Login no requiere autenticacion
-				.formLogin(form -> form.permitAll());
+				.formLogin(form -> form.loginPage("/login").permitAll());
 		return http.build();
 	}
 
