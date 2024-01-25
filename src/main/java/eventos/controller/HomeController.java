@@ -57,12 +57,16 @@ public class HomeController {
 		}
 	}
 	
+	
 	//CERRAR SESIÓN
 	
 	@GetMapping("/signout")
-	public String cerrarSesion(Model model) {
-		return "redirect:/";
+	public String cerrarSesion(HttpSession misesion, Usuario usuario) {
+		misesion.removeAttribute("usuario");
+		misesion.invalidate();
+		return "redirect:/home";
 	}
+
 	
 
 	// LOGIN
