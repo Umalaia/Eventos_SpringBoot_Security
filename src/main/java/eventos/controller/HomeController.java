@@ -100,9 +100,7 @@ public class HomeController {
 	public String verIndex(Model model, Authentication aut, HttpSession misesion, Usuario usuario, Tipo tipo) {
 		 if (aut != null && aut.isAuthenticated()) {
 		        System.out.println(aut.getName() + " - " + aut.getAuthorities());
-		 }else {
-		        model.addAttribute("usuario", "Invitado");
-		    }
+		 }
 		 
 		// Obtener eventos destacados
 		List<Evento> destacados = eDao.verDestacadosPorTipo(tipo.getIdTipo());

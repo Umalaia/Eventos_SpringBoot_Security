@@ -36,17 +36,18 @@
 	<main>
 		<section id="seccion">
 			<div id="tipo">
-				<h2 th:if="${#authentication.isAuthenticated()}">
+				<h1 class="bienvenido" th:if="${#authentication.isAuthenticated()}">
 					<span
 						th:utext="${#authentication.name != 'anonymousUser' ? 'Bienvenido, ' + #authentication.name : 'Bienvenido, Invitado'}"></span>
-				</h2>
+				</h1>
 				<form th:action="@{/home}" method="get">
+				<h2>Filtrar por tipo de evento : </h2>
 					<select name="idTipo">
 						<option>Tipos de eventos</option>
 						<option th:each="tipo : ${TiposEvento}" th:value="${tipo.idTipo}"
 							th:text="${tipo.nombre}" type="submit"></option>
 					</select> <br> <br>
-					<button type="submit">Filtrar por tipo</button>
+					<button class="filtro" type="submit">Filtrar por tipo</button>
 				</form>
 			</div>
 
@@ -70,7 +71,7 @@
 				</table>
 			</div>
 			<div class="listado">
-				<h2>Listado de Eventos Activos por tipo</h2>
+				<h2>Listado de Eventos Activos por tipo <span></span></h2>
 				<table border="1">
 					<tr>
 						<th>Nombre</th>
