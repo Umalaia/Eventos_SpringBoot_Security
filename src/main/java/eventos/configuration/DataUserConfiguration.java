@@ -34,11 +34,13 @@ public class DataUserConfiguration {
 		http.csrf(csrf -> csrf.disable());
 		// Los recursos estáticos no requieren autenticación
 
-		http.authorizeHttpRequests(authorize -> authorize.requestMatchers("static/**").permitAll()
+		http.authorizeHttpRequests(authorize -> authorize
+				.requestMatchers("/static/**").permitAll()
 				// Las vistas públicas no requieren autenticación
-				.requestMatchers("/", "/home", "/eventosDestacados", "/eventosActivos", "/signup", "/login", "/logout", "/detalles/**")
-				.permitAll().requestMatchers("/eventosActivos/verDetalles/**", "/eventosDestacados/verDetalles/**")
-				.permitAll().requestMatchers("/rest/encriptar/**").permitAll()
+				.requestMatchers("/", "/home", "/signup", "/login", "/logout").permitAll()
+				.requestMatchers("/eventosDestacados", "/eventosActivos", "/detalles/**").permitAll()
+				.requestMatchers("/eventosActivos/verDetalles/**", "/eventosDestacados/verDetalles/**").permitAll()
+				.requestMatchers("/rest/encriptar/**").permitAll()
 				// Todas las demás URLs de la Aplicación requieren autenticación
 				// Asignar permisos a URLs por ROLES
 

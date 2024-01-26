@@ -98,8 +98,12 @@ public class HomeController {
 
 	@GetMapping({"/", "/home"})
 	public String verIndex(Model model, Authentication aut, HttpSession misesion, Usuario usuario, Tipo tipo) {
-		System.out.println(aut.getName() + " - " + aut.getAuthorities());
-		
+		 if (aut != null && aut.isAuthenticated()) {
+		        System.out.println(aut.getName() + " - " + aut.getAuthorities());
+		 }else {
+		        model.addAttribute("usuario", "Invitado");
+		    }
+		 
 		// Obtener eventos destacados
 		List<Evento> destacados = eDao.verDestacadosPorTipo(tipo.getIdTipo());
 		model.addAttribute("destacados", destacados);
@@ -111,9 +115,6 @@ public class HomeController {
 		// Obtener todos los tipos de eventos
 		List<Tipo> tiposEvento = tDao.todosLosTiposEventos();
 		model.addAttribute("TiposEvento", tiposEvento);
-
-		model.addAttribute("usuario", usuario.getNombre());
-
 
 		return "home";
 	}

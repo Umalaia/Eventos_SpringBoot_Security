@@ -36,10 +36,10 @@
 	<main>
 		<section id="seccion">
 			<div id="tipo">
-			
-				<h2 th:if="${#authentication.isAuthenticated()}">Bienvenido, <span th:text="${#authentication.name}"></span>
+				<h2 th:if="${#authentication.isAuthenticated()}">
+					<span
+						th:utext="${#authentication.name != 'anonymousUser' ? 'Bienvenido, ' + #authentication.name : 'Bienvenido, Invitado'}"></span>
 				</h2>
-				<h2 th:unless="${#authentication.isAuthenticated()}">Inicia sesión para acceder a más funciones</h2>
 				<form th:action="@{/home}" method="get">
 					<select name="idTipo">
 						<option>Tipos de eventos</option>
