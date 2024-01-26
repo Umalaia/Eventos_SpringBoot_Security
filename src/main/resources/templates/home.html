@@ -2,8 +2,8 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
-<title>Index</title>
-<link rel="stylesheet" type="text/css" th:href="@{/css/Index.css}">
+<title>Home</title>
+<link rel="stylesheet" type="text/css" href="/css/Index.css">
 </head>
 <body>
 	<header>
@@ -41,7 +41,7 @@
 						th:utext="${#authentication.name != 'anonymousUser' ? 'Bienvenido, ' + #authentication.name : 'Bienvenido, Invitado'}"></span>
 				</h1>
 				<form th:action="@{/home}" method="get">
-				<h2>Filtrar por tipo de evento : </h2>
+				<h3>Filtrar por tipo de evento : </h3>
 					<select name="idTipo">
 						<option>Tipos de eventos</option>
 						<option th:each="tipo : ${TiposEvento}" th:value="${tipo.idTipo}"
