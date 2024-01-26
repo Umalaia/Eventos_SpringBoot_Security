@@ -7,8 +7,8 @@
 </head>
 <body>
 	<main>
-		<h1>Iniciar sesión</h1>
 		<h2 th:text="${mensaje}"></h2>
+		<h1>Iniciar sesión</h1>
 		<form th:action="@{/login}" th:object="${usuario}" method="post">
 			<label>Indique su usuario : </label> 
 			<input type="text" th:field="*{username}" placeholder="Username"> <br> <br> 

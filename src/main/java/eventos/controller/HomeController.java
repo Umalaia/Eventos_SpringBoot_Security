@@ -52,7 +52,7 @@ public class HomeController {
 			ratt.addFlashAttribute("mensaje", "Alta usuario realizada");
 			return "redirect:/login";
 		} else {
-			model.addAttribute("mensaje", "Ya existe como usuario");
+			ratt.addFlashAttribute("mensaje", "Ya existe como usuario");
 			return "redirect:/signup";
 		}
 	}
@@ -84,11 +84,10 @@ public class HomeController {
 		Usuario usuario = uDao.UsuarioYpass(username, password);
 		if(usuario != null) {
 		    usuario.setPassword(null);
-		    usuario.setNombre(username); // Establecer el nombre utilizando el username
+		    usuario.setNombre(username);
 		    misesion.setAttribute("usuario", usuario);
 		    return "redirect:/home";
-		
-		}
+		}else
 		ratt.addFlashAttribute("mensaje", "Usuario o Password incorrecto");
 		return "redirect:/login";
 	}
@@ -100,7 +99,9 @@ public class HomeController {
 	public String verIndex(Model model, Authentication aut, HttpSession misesion, Usuario usuario, Tipo tipo) {
 		 if (aut != null && aut.isAuthenticated()) {
 		        System.out.println(aut.getName() + " - " + aut.getAuthorities());
-		 }
+		 }else {
+		        model.addAttribute("usuario", "Invitado");
+		    }
 		 
 		// Obtener eventos destacados
 		List<Evento> destacados = eDao.verDestacadosPorTipo(tipo.getIdTipo());

@@ -12,23 +12,23 @@
 				<img id="logo" src="/img/Logo.png" />
 			</div>
 			<div id="botones">
-				<button>
-					<a th:href="@{/eventosDestacados}">Eventos Destacados</a>
+				<button class="not-authenticated">
+					<a sec:authorize="!isAuthenticated()" th:href="@{/eventosDestacados}">Eventos Destacados</a>
 				</button>
-				<button>
-					<a th:href="@{/eventosActivos}">Eventos Activos</a>
+				<button class="not-authenticated">
+					<a sec:authorize="!isAuthenticated()" th:href="@{/eventosActivos}">Eventos Activos</a>
 				</button>
-				<button>
-					<a th:href="@{/misReservas}">Mis reservas</a>
+				<button class="authenticated">
+					<a  sec:authorize="isAuthenticated()" th:href="@{/misReservas}">Mis reservas</a>
 				</button>
-				<button>
-					<a th:href="@{/login}">Login</a>
+				<button class="not-authenticated">
+					<a sec:authorize="!isAuthenticated()" th:href="@{/login}">Login</a>
 				</button>
-				<button>
-					<a th:href="@{/signup}">Registro</a>
+				<button class="not-authenticated">
+					<a sec:authorize="!isAuthenticated()" th:href="@{/signup}">Registro</a>
 				</button>
-				<button>
-					<a th:href="@{/signout}">Cerrar sesión</a>
+				<button class="authenticated">
+					<a  sec:authorize="isAuthenticated()" th:href="@{/signout}">Cerrar sesión</a>
 				</button>
 			</div>
 		</nav>
@@ -40,6 +40,7 @@
 					<span
 						th:utext="${#authentication.name != 'anonymousUser' ? 'Bienvenido, ' + #authentication.name : 'Bienvenido, Invitado'}"></span>
 				</h1>
+				<h3 th:text="${mensaje}"></h3>
 				<form th:action="@{/home}" method="get">
 				<h3>Filtrar por tipo de evento : </h3>
 					<select name="idTipo">
