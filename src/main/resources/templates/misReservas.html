@@ -13,7 +13,7 @@
 			</div>
 			<div id="botones">
 				<button id="volver">
-					<a th:href="@{/}">Volver a inicio</a>
+					<a sec:authorize="isAuthenticated()" th:href="@{/}">Volver a inicio</a>
 				</button>
 			</div>
 		</nav>
@@ -33,7 +33,7 @@
 			<td th:text="${reserva.evento.fechaInicio}"></td>
 			<td th:text="${reserva.cantidad}"></td>
 			<td th:text="${reserva.precioVenta}"></td>
-			<td><a th:href="@{/misReservas/eliminar/{id}(id=${reserva.idReserva})}">Cancelar</a></td>
+			<td><a sec:authorize="isAuthenticated()" th:href="@{/misReservas/eliminar/{id}(id=${reserva.idReserva})}">Cancelar</a></td>
 		</tr>
 	</table>
 	<br><br>

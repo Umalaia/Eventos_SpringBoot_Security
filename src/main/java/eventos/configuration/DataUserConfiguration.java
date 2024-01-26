@@ -49,7 +49,6 @@ public class DataUserConfiguration {
 				.requestMatchers("/rest/encriptar/**").permitAll()
 				// Todas las demás URLs de la Aplicación requieren autenticación
 				// Asignar permisos a URLs por ROLES
-				//.requestMatchers("/#").hasAnyAuthority("ROLE_CLIENTE")
 				//.requestMatchers("/misReservas").hasAnyAuthority("ROLE_CLIENTE")
 				//.requestMatchers("/signout").hasAnyAuthority("ROLE_CLIENTE")
 

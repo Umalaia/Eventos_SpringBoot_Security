@@ -12,22 +12,22 @@
 				<img id="logo" src="/img/Logo.png" />
 			</div>
 			<div id="botones">
-				<button class="not-authenticated">
+				<button>
 					<a sec:authorize="!isAuthenticated()" th:href="@{/eventosDestacados}">Eventos Destacados</a>
 				</button>
-				<button class="not-authenticated">
+				<button>
 					<a sec:authorize="!isAuthenticated()" th:href="@{/eventosActivos}">Eventos Activos</a>
 				</button>
-				<button class="authenticated">
+				<button>
 					<a  sec:authorize="isAuthenticated()" th:href="@{/misReservas}">Mis reservas</a>
 				</button>
-				<button class="not-authenticated">
+				<button>
 					<a sec:authorize="!isAuthenticated()" th:href="@{/login}">Login</a>
 				</button>
-				<button class="not-authenticated">
+				<button>
 					<a sec:authorize="!isAuthenticated()" th:href="@{/signup}">Registro</a>
 				</button>
-				<button class="authenticated">
+				<button>
 					<a  sec:authorize="isAuthenticated()" th:href="@{/signout}">Cerrar sesión</a>
 				</button>
 			</div>

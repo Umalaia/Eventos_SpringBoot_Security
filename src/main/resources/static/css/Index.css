@@ -1,13 +1,6 @@
 @charset "UTF-8";
 
 
-.not-authenticated button{
-	display: none;
-}
-.authenticated button {
-    display: none;
-}
-
 /** POR TAG **/
 body {
 	background: #CEEFF8;
