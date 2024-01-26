@@ -48,10 +48,11 @@ nav {
 }
 
 #tipo{
-	margin-right:10%;
-	margin-top: 2%;
+	margin-top: 1%;
 	margin-bottom:2%;
+	width: 100%;
 }
+
 
 #volver {
 	margin-left: 60%;
@@ -64,7 +65,7 @@ nav {
 }
 
 #cont_logo {
-	width: 70%;
+	width: 100%;
 }
 
 #botones {
@@ -120,7 +121,6 @@ select {
 	font-size: 18px;
 	font-family: Calibri;
 	font-weight: bold;
-	margin-right: 15px;
 }
 
 option{

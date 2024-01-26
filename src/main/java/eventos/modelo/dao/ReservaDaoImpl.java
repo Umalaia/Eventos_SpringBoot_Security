@@ -1,10 +1,12 @@
 package eventos.modelo.dao;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import eventos.modelo.entitis.Evento;
 import eventos.modelo.entitis.Reserva;
 import eventos.modelo.entitis.Usuario;
 import eventos.modelo.repository.ReservaRepository;
@@ -14,15 +16,6 @@ public class ReservaDaoImpl implements ReservaDao{
 	@Autowired
 	private ReservaRepository rRepo;
 
-	@Override
-	public Reserva altaReserva(Reserva reserva) {
-		try {
-			return rRepo.save(reserva);
-		} catch (Exception e) {
-			e.printStackTrace();
-			return null;
-		}
-	}
 
 	@Override
 	public int eliminarReserva(int idReserva) {
@@ -50,5 +43,23 @@ public class ReservaDaoImpl implements ReservaDao{
 	public List<Reserva> verReservasPorUsuario(Usuario usuario) {
 		return rRepo.verReservasPorUsuario(usuario);
 	}
+
+	
+	@Override
+	public void realizarReserva(Evento evento, Reserva reserva, Usuario usuario) {
+		BigDecimal precio = evento.getPrecio();
+		int cantidad = reserva.getCantidad();
+		BigDecimal precioTotal = evento.calcularPrecioTotal(precio,cantidad);
+
+        // Crea una nueva reserva
+        Reserva rva = new Reserva();
+        reserva.setEvento(evento);
+        reserva.setCantidad(cantidad);
+        reserva.setUsuario(usuario);
+        reserva.setPrecioVenta(precioTotal);
+
+        rRepo.save(rva);
+    }
+	
 
 }
