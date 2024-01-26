@@ -9,5 +9,7 @@ public interface EventoDao {
 	Evento verUnEvento(int idEvento);
 	List<Evento> verEventosDestacados();
 	List<Evento> verEventosActivos();	
+	List<Evento> verDestacadosPorTipo(int idTipo);
+	List<Evento> verActivosPorTipo(int idTipo);
 
 }

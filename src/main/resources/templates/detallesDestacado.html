@@ -18,30 +18,30 @@
 			</div>
 		</nav>
 	</header>
-<main>
-	<h1>Detalle del evento destacado seleccionado</h1>
-	<table border="1">
-		<tr>
-			<th>Nombre</th>
-			<th>Descripción</th>
-			<th>Aforo</th>
-			<th>Dirección</th>
-			<th>Duración</th>
-			<th>Fecha de inicio</th>
-			<th>Mínimo asistencia</th>
-			<th>Precio</th>
-		</tr>
-		<tr>
-			<td th:text="${evento.nombre}"></td>
-			<td th:text="${evento.descripcion}"></td>
-			<td th:text="${evento.aforoMaximo}"></td>
-			<td th:text="${evento.direccion}"></td>
-			<td th:text="${evento.duracion}"></td>
-			<td th:text="${evento.fechaInicio}"></td>
-			<td th:text="${evento.minimoAsistencia}"></td>
-			<td th:text="${evento.precio}"></td>
-		</tr>
-	</table>
+	<main>
+		<h1>Detalle del evento destacado seleccionado</h1>
+		<table border="1">
+			<tr>
+				<th>Nombre</th>
+				<th>Descripción</th>
+				<th>Aforo</th>
+				<th>Dirección</th>
+				<th>Duración</th>
+				<th>Fecha de inicio</th>
+				<th>Mínimo asistencia</th>
+				<th>Precio</th>
+			</tr>
+			<tr>
+				<td th:text="${evento.nombre}"></td>
+				<td th:text="${evento.descripcion}"></td>
+				<td th:text="${evento.aforoMaximo}"></td>
+				<td th:text="${evento.direccion}"></td>
+				<td th:text="${evento.duracion}"></td>
+				<td th:text="${evento.fechaInicio}"></td>
+				<td th:text="${evento.minimoAsistencia}"></td>
+				<td th:text="${evento.precio}"></td>
+			</tr>
+		</table>
 		<section>
 			<article>
 				<h3>
@@ -49,13 +49,15 @@
 				</h3>
 			</article>
 			<article>
-				<label>Cantidad a reservar :</label>
-				<input id="cant" type="number" min="1" max="10" step="1" />
-				
+				<label>Cantidad a reservar :</label> <input id="cant" type="number"
+					min="1" max="10" step="1" />
+
 			</article>
 			<br>
-			<button><a th:href="@{/misReservas}">Reservar</a></button>
+			<button>
+				<a th:href="@{/misReservas}">Mis reservas</a>
+			</button>
 		</section>
-</main>
+	</main>
 </body>
 </html>

@@ -6,7 +6,6 @@ body {
 
 main{
 	margin-left: 4%;
-	margin-top: 3%;
 }
 
 h1 {
@@ -48,6 +47,12 @@ nav {
 	align-items: center;
 }
 
+#tipo{
+	margin-right:10%;
+	margin-top: 2%;
+	margin-bottom:2%;
+}
+
 #volver {
 	margin-left: 60%;
 	
@@ -72,8 +77,8 @@ nav {
 	align-items: center;
 }
 
-#listado{
-	width: 80%;
+.listado{
+	width: 50%;
 }
 
 #bienvenido{

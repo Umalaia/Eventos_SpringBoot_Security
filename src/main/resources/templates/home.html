@@ -11,6 +11,17 @@
 			<div id="cont_logo">
 				<img id="logo" src="/img/Logo.png" />
 			</div>
+			<div id="tipo">
+				<form th:action="@{/home}" method="get">
+					<select name="idTipo">
+						<option>Tipos de eventos</option>
+						<option th:each="tipo : ${TiposEvento}" th:value="${tipo.idTipo}"
+							th:text="${tipo.nombre}" type="submit"></option>
+					</select>
+					<br><br>
+					<button type="submit">Filtrar por tipo</button>
+				</form>
+			</div>
 			<div id="botones">
 				<button>
 					<a th:href="@{/eventosDestacados}">Eventos Destacados</a>
@@ -18,19 +29,6 @@
 				<button>
 					<a th:href="@{/eventosActivos}">Eventos Activos</a>
 				</button>
-				<select>
-					<option>Tipos de eventos</option>
-					<option th:value="Concierto" th:text="Concierto"></option>
-					<option th:value="Despedida" th:text="Despedida"></option>
-					<option th:value="Cumpleaños" th:text="Cumpleaños"></option>
-					<option th:value="Boda" th:text="Boda"></option>
-					<option th:value="Conferencia" th:text="Conferencia"></option>
-					<option th:value="Deportivo" th:text="Deportivo"></option>
-					<option th:value="Cultural" th:text="Cultural"></option>
-					<option th:value="Fiesta" th:text="Fiesta"></option>
-					<option th:value="Exhibición" th:text="Exibición"></option>
-					<option th:value="Teatro" th:text="Teatro"></option>
-				</select>
 				<button>
 					<a th:href="@{/misReservas}">Mis reservas</a>
 				</button>
@@ -47,9 +45,16 @@
 		</nav>
 	</header>
 	<main>
+	<div id="bienvenido">
+				<h2 th:if="${#authentication.isAuthenticated()}">
+					Bienvenido, <span th:text="${#authentication.name}"></span>
+				</h2>
+				<h2 th:unless="${#authentication.isAuthenticated()}">Inicia
+					sesión para acceder a más funciones</h2>
+			</div>
 		<section id="seccion">
-			<div id="listado">
-				<h2>Listado de Eventos Destacados</h2>
+			<div class="listado">
+				<h2>Listado de Eventos Destacados por tipo</h2>
 				<table border="1">
 					<tr>
 						<th>Nombre</th>
@@ -65,15 +70,23 @@
 					</tr>
 				</table>
 			</div>
-			<div id="bienvenido">
-				<h3 th:if="${#authentication.isAuthenticated()}">
-					Bienvenido, <span th:text="${#authentication.name}"></span>
-				</h3>
-				<h3 th:unless="${#authentication.isAuthenticated()}">Inicia
-					sesión para acceder a más funciones</h3>
+			<div class="listado">
+				<h2>Listado de Eventos Activos por tipo</h2>
+				<table border="1">
+					<tr>
+						<th>Nombre</th>
+						<th>Aforo</th>
+						<th>Fecha inicio</th>
+						<th>Opciones</th>
+					</tr>
+					<tr th:each="activo : ${activos}">
+						<td th:text="${activo.descripcion}"></td>
+						<td th:text="${activo.aforoMaximo}"></td>
+						<td th:text="${activo.fechaInicio}"></td>
+						<td><a th:href="@{/detalles/{id}(id=${activo.idEvento})}">Detalles</a></td>
+					</tr>
+				</table>
 			</div>
-
-
 		</section>
 	</main>
 </body>

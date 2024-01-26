@@ -10,7 +10,11 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import eventos.modelo.dao.EventoDao;
 import eventos.modelo.dao.ReservaDao;
+import eventos.modelo.dao.UsuarioDao;
 import eventos.modelo.entitis.Evento;
+import eventos.modelo.entitis.Reserva;
+import eventos.modelo.entitis.Usuario;
+import jakarta.servlet.http.HttpSession;
 
 @Controller
 public class EventoController {
@@ -19,63 +23,72 @@ public class EventoController {
 	private EventoDao eDao;
 	
 	@Autowired
+	private UsuarioDao uDao;
+	
+	@Autowired
 	private ReservaDao rDao;
 	
 	//VER DETALLES
 	
 	@GetMapping("/detalles/{id}")
-	public String detallesEventos (@PathVariable ("id") int idEvento, Model model) {
+	public String detallesEventos (@PathVariable ("id") int idEvento, Model model, Usuario usuario) {
 		Evento evento = eDao.verUnEvento(idEvento);
+		Usuario usu = uDao.verUsuario(usuario.getUsername());
 		model.addAttribute("evento", evento);
+		model.addAttribute("usuario", usu);
 		return "detalles";
 	}
 	
+	@PostMapping("/detalles/{id}")
+	public String postAltaReserva(RedirectAttributes ratt, HttpSession misesion, @PathVariable ("id") int idEvento,
+			Evento evento, Usuario usuario, Reserva reserva) {
+		Usuario usu = (Usuario)misesion.getAttribute(usuario.getUsername());
+		Reserva rva = new Reserva();
+		rva.setEvento(evento);
+		
+		ratt.addFlashAttribute("mensaje", "Reserva realizada con éxito");
+		return "redirect:/misReservas";
+	}
+	
+	
 	@GetMapping("/eventosDestacados/verDetalles/{id}")
-	public String detallesEventosDestacados (@PathVariable ("id") int idEvento, Model model) {
+	public String detallesEventosDestacados (@PathVariable ("id") int idEvento, Model model, Usuario usuario) {
 		Evento evento = eDao.verUnEvento(idEvento);
+		Usuario usu = uDao.verUsuario(usuario.getUsername());
 		model.addAttribute("evento", evento);
+		model.addAttribute("usuario", usu);
 		return "detallesDestacado";
 	}
+	
+	
+	@PostMapping("/eventosDestacados/verDetalles/{id}")
+	public String postAltaReservaDes(RedirectAttributes ratt, @PathVariable ("id") int idEvento, Usuario usuario) {
+		
+		ratt.addFlashAttribute("mensaje", "Reserva realizada con éxito");
+		return "redirect:/misReservas";
+	}
+	
+	
 	
 	@GetMapping("/eventosActivos/verDetalles/{id}")
-	public String detallesEventosActivos (@PathVariable ("id") int idEvento, Model model) {
+	public String detallesEventosActivos (@PathVariable ("id") int idEvento, Model model, Usuario usuario) {
 		Evento evento = eDao.verUnEvento(idEvento);
+		Usuario usu = uDao.verUsuario(usuario.getUsername());
 		model.addAttribute("evento", evento);
+		model.addAttribute("usuario", usu);
 		return "detallesActivos";
 	}
 	
 	
-	//ALTA 
-	
-	@GetMapping("/eventosDestacados/verDetalles/{id}/alta")
-	public String altaReservaDes(Model model, @PathVariable ("id") int idEvento) {
-		return "detallesDestacado";
-	}
-	
-	//FALTA POSTMAPPING
-	
-	@PostMapping("/eventosDestacados/verDetalles/{id}/alta")
-	public String postAltaReservaDes(RedirectAttributes ratt) {
+	@PostMapping("/eventosActivos/verDetalles/{id}")
+	public String postAltaReservaAct(RedirectAttributes ratt, @PathVariable ("id") int idEvento, Usuario usuario) {
 		
 		ratt.addFlashAttribute("mensaje", "Reserva realizada con éxito");
 		return "redirect:/misReservas";
 	}
 	
 	
-	@GetMapping("/eventosActivos/verDetalles/{id}/alta")
-	public String altaReservaAc(Model model, @PathVariable ("id") int idEvento) {
-		return "detallesActivos";
-	}
 	
-	
-	//FALTA POSTMAPPING
-	
-	@PostMapping("/eventosActivos/verDetalles/{id}/alta")
-	public String postAltaReservaAct(RedirectAttributes ratt) {
-		
-		ratt.addFlashAttribute("mensaje", "Reserva realizada con éxito");
-		return "redirect:/misReservas";
-	}
 	
 	
 	

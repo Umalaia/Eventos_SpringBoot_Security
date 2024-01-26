@@ -7,13 +7,16 @@ import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import eventos.modelo.dao.EventoDao;
 import eventos.modelo.dao.ReservaDao;
 import eventos.modelo.dao.UsuarioDao;
+import eventos.modelo.entitis.Evento;
 import eventos.modelo.entitis.Reserva;
 import eventos.modelo.entitis.Usuario;
 import jakarta.servlet.http.HttpSession;
@@ -26,6 +29,9 @@ public class ReservaController {
 	
 	@Autowired
 	private UsuarioDao uDao;
+	
+	@Autowired
+	private EventoDao eDao;
 	
 	
 	@GetMapping("/misReservas")
@@ -51,6 +57,6 @@ public class ReservaController {
 			model.addAttribute("mensaje", "No ha podido eliminar la reserva");
 		return "redirect:/misReservas";
 	}
-		
-
+	
+    
 }

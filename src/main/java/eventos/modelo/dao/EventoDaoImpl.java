@@ -7,11 +7,15 @@ import org.springframework.stereotype.Repository;
 
 import eventos.modelo.entitis.Evento;
 import eventos.modelo.repository.EventoRepository;
+import eventos.modelo.repository.ReservaRepository;
 @Repository
 public class EventoDaoImpl implements EventoDao {
 	
 	@Autowired
 	private EventoRepository eRepo;
+	
+	@Autowired
+	private ReservaRepository rRepo;
 
 	@Override
 	public List<Evento> todosLosEventos() {
@@ -32,5 +36,16 @@ public class EventoDaoImpl implements EventoDao {
 	public List<Evento> verEventosActivos() {
 		return eRepo.verActivos();
 	}
+
+	@Override
+	public List<Evento> verDestacadosPorTipo(int idTipo) {
+		return eRepo.verEventosDestacadosPorTipo(idTipo);
+	}
+
+	@Override
+	public List<Evento> verActivosPorTipo(int idTipo) {
+		return eRepo.verEventosActivosPorTipo(idTipo);
+	}
+	
 	
 }
