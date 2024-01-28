@@ -13,22 +13,22 @@
 			</div>
 			<div id="botones">
 				<button>
-					<a sec:authorize="!isAuthenticated()" th:href="@{/eventosDestacados}">Eventos Destacados</a>
+					<a th:href="@{/eventosDestacados}">Eventos Destacados</a>
 				</button>
 				<button>
-					<a sec:authorize="!isAuthenticated()" th:href="@{/eventosActivos}">Eventos Activos</a>
+					<a th:href="@{/eventosActivos}">Eventos Activos</a>
 				</button>
 				<button>
 					<a  sec:authorize="isAuthenticated()" th:href="@{/misReservas}">Mis reservas</a>
+				</button>
+				<button>
+					<a  sec:authorize="isAuthenticated()" th:href="@{/signout}">Cerrar sesión</a>
 				</button>
 				<button>
 					<a sec:authorize="!isAuthenticated()" th:href="@{/login}">Login</a>
 				</button>
 				<button>
 					<a sec:authorize="!isAuthenticated()" th:href="@{/signup}">Registro</a>
-				</button>
-				<button>
-					<a  sec:authorize="isAuthenticated()" th:href="@{/signout}">Cerrar sesión</a>
 				</button>
 			</div>
 		</nav>
@@ -42,7 +42,7 @@
 				</h1>
 				<h3 th:text="${mensaje}"></h3>
 				<form th:action="@{/home}" method="get">
-				<h3>Filtrar por tipo de evento : </h3>
+				<h3>Seleccionar tipo de evento : </h3>
 					<select name="idTipo">
 						<option>Tipos de eventos</option>
 						<option th:each="tipo : ${TiposEvento}" th:value="${tipo.idTipo}"
