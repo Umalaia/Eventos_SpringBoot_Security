@@ -35,13 +35,31 @@ public class HomeController {
 	PerfilDao pDao;
 
 	// REGISTRO
-
+	/**
+	 * Este método se utiliza para mostrar un formulario de registro cuando un usuario visita la URL "/signup". 
+	 * Inicializa un objeto Usuario vacío y lo pasa al modelo, luego redirige a la vista "registro".
+	 * 
+	 * @param model		Parámetro, que se utiliza para pasar datos a la vista.
+	 * @return			Devuelve el nombre de la vista que se mostrará después de ejecutar este método. "registro" 
+	 */
 	@GetMapping("/signup")
 	public String registrar(Model model) {
 		model.addAttribute("usuario", new Usuario());
 		return "registro";
 	}
 
+	/**
+	 * Este método se utiliza para procesar solicitudes de registro de nuevos usuarios. Configura la información del usuario,
+	 * intenta registrar al usuario y redirige al usuario a la página de inicio de sesión o de registro dependiendo del resultado del registro.
+	 * 
+	 * @param model		Parámetro, que se utiliza para pasar datos a la vista.
+	 * @param usuario	Objeto con la información de Usuario.
+	 * 					usuario.setEnabled(1);: Establece el estado del usuario como habilitado. El valor 1  significa "habilitado".
+	 * 					usuario.setFechaRegistro(new Date()); Establece la fecha de registro del usuario como la fecha actual.
+	 * 					usuario.addPerfil(pDao.verUnPerfil(3)); Añade un perfil al usuario. 
+						usuario.setPassword("{noop}" + usuario.getPassword()); Configura la contraseña del usuario. {noop} significa no encifrado o encriptado
+	 * @return			Redirige al usuario de vuelta a la página de registro ("/signup").
+	 */
 	@PostMapping("/signup")
 	public String registrar(Model model, Usuario usuario, RedirectAttributes ratt) {
 		usuario.setEnabled(1);
@@ -59,7 +77,18 @@ public class HomeController {
 	
 	
 	//CERRAR SESIÓN
-	
+	/**
+	 * Este método se utiliza para cerrar la sesión de un usuario.
+	   Elimina la información del usuario de la sesión y luego invalida la sesión antes de redirigir al usuario a la página de inicio.
+	   
+	 * @param misesion		Utilizado para controlar la sesión habilitada
+	 * 						misesion.removeAttribute("usuario");Elimina el atributo llamado "usuario" de la sesión. 
+	 * 						Esta  información del usuario se almacena en la sesión con el nombre de atributo "usuario".
+							
+							misesion.invalidate(); Invalida la sesión, y cierra la sesión actual del usuario.
+	 * @param usuario		Objeto con la información de Usuario.		
+	 * @return			 	Después de cerrar la sesión, redirige al usuario a la página de inicio ("/home").
+	 */
 	@GetMapping("/signout")
 	public String cerrarSesion(HttpSession misesion, Usuario usuario) {
 		misesion.removeAttribute("usuario");
@@ -70,12 +99,37 @@ public class HomeController {
 	
 
 	// LOGIN
+	/**
+	 * Este método se utiliza para manejar solicitudes GET a la página de login. Guarda la información del usuario en la sesión y luego
+	 * redirige a la vista "login"
+	 * 
+	 * @param aut			Toma información del objeto Usuario autentificado
+	 * @param model			Utilizado pasar datos a la vista.
+	 * @param misesion		Usado para para manejar la sesión
+	 * 						misesion.setAttribute("usuario", usuario); Almacena el objeto usuario en la sesión con el nombre de atributo "usuario". 
+	 * 						la información del usuario se guarda en la sesión para ser utilizada en sesiones posteriores.
+	 * @param usuario		Objeto usuario con la información del mismo.
+	 * @return				Devuelve el nombre de la vista que se mostrará después de ejecutar este método
+	 * 						Por lo tanto, cuando se visita la URL "/login", se renderizará la vista de login.
+	 */
 
 	@GetMapping("/login")
 	public String procesarLogin(Authentication aut, Model model, HttpSession misesion,Usuario usuario) {
 		misesion.setAttribute("usuario", usuario);
 		return "login";
 	}
+	
+	/**
+	 * Este método maneja solicitudes POST para el inicio de sesión. Intenta autenticar al usuario con el nombre de usuario y la contraseña proporcionados,
+	 * Sí la autenticación es exitosa, almacena la información del usuario en la sesión y redirige al usuario a la página de inicio. Si la autenticación falla,
+	 * agrega un mensaje de error y redirige al usuario de vuelta a la página de login.
+	 * 
+	 * @param username		Parametro donde indica el nombre
+	 * @param password		Parametro donde indica el password
+	 * @param misesion		Objeto para controlar la sesión.
+	 * @param ratt			Agrega un mensaje de error como atributo flash para mostrarlo después de la redirección.
+	 * @return				Redirige al usuario a la página de login ("/login").
+	 */
 	
 	
 	@PostMapping("/login")
@@ -94,6 +148,22 @@ public class HomeController {
 
 
 	// HOME
+	
+	/**
+	 * Este método maneja solicitudes GET para la página principal. Verifica si hay un usuario autenticado,
+	 * ( muestra el nombre de usuario y su rol. En caso de que el usuario no este autentificado, agrega al modelo la información
+	 * de que el usuario es un invitado, mostrando en las vistas como usuario no autentificado.
+	 * recopila información sobre eventos destacados y activos, así como todos los tipos de eventos, y luego pasa
+	 * esta información al modelo antes de redirigir al usuario a la vista "home".
+	 * 
+	 * @param model			Toma un objeto Model para pasar datos a la vista
+	 * @param aut			Objeto para manejar la información de autenticación del usuario
+	 * @param misesion		Objeto para controlar la sesión.
+	 * @param usuario		Objeto usuario con la información del mismo.
+	 * @param tipo			Objet tipo para saber el tipo de evento
+	 * @return				Devuelve el nombre de la vista que se mostrará después de ejecutar este método.
+	 * 						cuando se visita la URL "/" o "/home", se renderizará la vista "home".
+	 */
 
 	@GetMapping({"/", "/home"})
 	public String verIndex(Model model, Authentication aut, HttpSession misesion, Usuario usuario, Tipo tipo) {
@@ -104,32 +174,67 @@ public class HomeController {
 		    }
 		 
 		// Obtener eventos destacados
+		 /**
+		  *  Obtiene una lista de eventos destacados utilizando un objeto eDao y el tipo de evento proporcionado.
+		  *  Agrega la lista de eventos destacados al modelo para que esté disponible en la vista.
+		  */
 		List<Evento> destacados = eDao.verDestacadosPorTipo(tipo.getIdTipo());
 		model.addAttribute("destacados", destacados);
 		
 		// Obtener eventos destacados
+		/**
+		 * Obtiene una lista de eventos activos utilizando un objeto eDao y el tipo de evento proporcionado
+		 * Agrega la lista de eventos activos al modelo para que esté disponible en la vista.
+		 */
 		List<Evento> activos = eDao.verActivosPorTipo(tipo.getIdTipo());
 		model.addAttribute("activos", activos);
 
 		// Obtener todos los tipos de eventos
+		/**
+		 * Obtiene una lista de todos los tipos de eventos utilizando un objeto tDao
+		 * Agrega la lista de tipos de eventos al modelo para que esté disponible en la vista.
+		 */
 		List<Tipo> tiposEvento = tDao.todosLosTiposEventos();
 		model.addAttribute("TiposEvento", tiposEvento);
 
 		return "home";
 	}
 
-	
+	/**
+	 * Este método maneja solicitudes GET para mostrar una lista de eventos activos. 
+	 * Obtiene la lista de eventos activos a través de un objeto eDao y la agrega al modelo antes de redirigir al usuario
+	 * a la vista "eventosActivos".
+	 * 
+	 * @param model			Para pasar datos a la vista
+	 * @param aut			Objeto para manejar la información de autenticación del usuario
+	 * @param misesion		Objeto para controlar la sesión.
+	 * @return				Devuelve el nombre de la vista que se mostrará después de ejecutar este método.
+	 * 						cuando se visita la URL "/eventosActivos", se renderizará la vista "eventosActivos".
+	 */
 	
 	@GetMapping("/eventosActivos")
 	public String verActivos(Model model, Authentication aut, HttpSession misesion) {
 
 		// Obtener eventos activos
+		/**
+		 * Obtiene una lista de eventos activos utilizando un objeto eDao 
+		 */
 		List<Evento> activos = eDao.verEventosActivos();
 		model.addAttribute("activos", activos);
 
 		return "eventosActivos";
 	}
 
+	/**
+	 * Este método maneja solicitudes GET para mostrar una lista de eventos destacados. Obtiene la lista de eventos destacados a través 
+	 * de un objeto eDao y la agrega al modelo antes de redirigir al usuario a la vista "eventosDestacados".
+	 * 
+	 * @param model			Para pasar datos a la vista
+	 * @param aut			Objeto para manejar la información de autenticación del usuario
+	 * @param misesion		Objeto para controlar la sesión.
+	 * @return				Devuelve el nombre de la vista que se mostrará después de ejecutar este método.
+	 * 						Por lo tanto, cuando se visita la URL "/eventosDestacados", se renderizará la vista "eventosDestacados".
+	 */
 	@GetMapping("/eventosDestacados")
 	public String verDestacados(Model model, Authentication aut, HttpSession misesion) {
 
@@ -139,7 +244,16 @@ public class HomeController {
 		return "eventosDestacados";
 	}
 	
-	
+	/**
+	 * Este método maneja solicitudes GET para mostrar detalles de eventos. Obtiene la lista de eventos destacados a través
+	 * de un objeto eDao y la agrega al modelo antes de redirigir al usuario a la vista "detalles". 
+	 * 
+	 * @param model			Para pasar datos a la vista
+	 * @param aut			Objeto para manejar la información de autenticación del usuario
+	 * @param misesion		Objeto para controlar la sesión.
+	 * @return				Devuelve el nombre de la vista que se mostrará después de ejecutar este método.
+	 * 						cuando se visita la URL "/detalles", se renderizará la vista "detalles".
+	 */
 	@GetMapping("/detalles")
 	public String verDetalles(Model model, Authentication aut, HttpSession misesion) {
 
