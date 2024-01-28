@@ -1,5 +1,7 @@
 package eventos.controller;
 
+import java.math.BigDecimal;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -38,13 +40,25 @@ public class EventoController {
 	 */
 	
 	@GetMapping("/detalles/{id}")
-	public String detallesEventos (@PathVariable ("id") int idEvento, Model model, Usuario usuario, Reserva reserva) {
-		Evento evento = eDao.verUnEvento(idEvento);
-		Usuario usu = uDao.verUsuario(usuario.getUsername());
-		model.addAttribute("evento", evento);
-		model.addAttribute("usuario", usu);
-		return "detalles";
+	public String detallesEventos (@PathVariable("id") int idEvento, Model model, Usuario usuario, Reserva reserva) {
+	    Evento evento = eDao.verUnEvento(idEvento);
+	    Usuario usu = uDao.verUsuario(usuario.getUsername());
+
+	    // Calcular cantidad utilizando los métodos de Reserva
+	    int cantidadDisponible = reserva.calcularCantidad(evento.getAforoMaximo(), reserva.getCantidad());
+
+	    // Calcular precio utilizando el método de Reserva
+	   // BigDecimal precioTotal = rva.calcularPrecio(evento);
+
+	    model.addAttribute("evento", evento);
+	    model.addAttribute("usuario", usu);
+	    model.addAttribute("cantidad", cantidadDisponible);
+	    //model.addAttribute("precio", precioTotal);
+
+	    return "detalles";
 	}
+
+	
 	/**
 	 * Este método sirve para crear una reserva para un evento específico, una vez realizada la reserva retorna
 	 * a la página mis reservas con el mensaje satisfactorio de reserva realizada.
@@ -57,8 +71,6 @@ public class EventoController {
 	 * @param reserva	 Objeto con la información de la reserva 
 	 * @return		     Redirige a la vista misReservas
 	 */
-	
-	
 	@PostMapping("/detalles/{id}")
 	public String postAltaReserva(RedirectAttributes ratt, HttpSession misesion, @PathVariable ("id") int idEvento,
 			Evento evento, Usuario usuario, Reserva reserva) {
@@ -69,6 +81,7 @@ public class EventoController {
 		ratt.addFlashAttribute("mensaje", "Reserva realizada con éxito");
 		return "redirect:/misReservas";
 	}
+	
 	/**
 	 * Este método se encarga de mostrar los detalles de un evento destacado, obteniendo la información necesaria del evento
 	 * y del usuario actual y luego pasándola a una vista llamada "detallesDestacado".
@@ -81,8 +94,6 @@ public class EventoController {
 	 * @return				Devuelve a la vista que se mostrará después de ejecutar el método. En este caso,
 	 *  			 		vista se llama "detallesDestacado".
 	 */
-	
-	
 	@GetMapping("/eventosDestacados/verDetalles/{id}")
 	public String detallesEventosDestacados (@PathVariable ("id") int idEvento, Model model, Usuario usuario) {
 		Evento evento = eDao.verUnEvento(idEvento);
@@ -91,6 +102,7 @@ public class EventoController {
 		model.addAttribute("usuario", usu);
 		return "detallesDestacado";
 	}
+	
 	/**
 	 * Este método se utiliza para realizar una reserva después de visualizar los detalles de un evento destacado. 
 	 * Agrega un mensaje de éxito como atributo flash y redirige al usuario a la página de "misReservas".
@@ -100,7 +112,6 @@ public class EventoController {
 	 * @param usuario		Objeto con la información del usuario
 	 * @return				Después de realizar la reserva satisfactoriamente, redirige al usuario a la página "/misReservas".
 	 */
-	
 	@PostMapping("/eventosDestacados/verDetalles/{id}")
 	public String postAltaReservaDes(RedirectAttributes ratt, @PathVariable ("id") int idEvento, Usuario usuario) {
 		
@@ -119,7 +130,6 @@ public class EventoController {
 	 * @return				Devuelve el nombre de la vista que se mostrará después de ejecutar este método en este caso
 	 * 						"detallesActivos".
 	 */
-	
 	@GetMapping("/eventosActivos/verDetalles/{id}")
 	public String detallesEventosActivos (@PathVariable ("id") int idEvento, Model model, Usuario usuario) {
 		Evento evento = eDao.verUnEvento(idEvento);
@@ -144,10 +154,6 @@ public class EventoController {
 		ratt.addFlashAttribute("mensaje", "Reserva realizada con éxito");
 		return "redirect:/misReservas";
 	}
-	
-	
-	
-	
 	
 	
 }

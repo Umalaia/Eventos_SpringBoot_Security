@@ -44,11 +44,14 @@
 	</table>
 		<section>
 			<article>
-				<h3 sec:authorize="isAuthenticated()"> Quedan : <span></span></h3>
+				<h3 sec:authorize="isAuthenticated()"> Quedan : <span th:text="${cantidad}"></span></h3>
 			</article>
 			<article>
-				<label sec:authorize="isAuthenticated()">Cantidad a reservar : <span th:text="${cantidad}"></span></label>
+				<label sec:authorize="isAuthenticated()">Cantidad a reservar : </label>
 				<input sec:authorize="isAuthenticated()" id="cant" type="number" min="1" max="10" step="1" />
+			</article>
+			<article>
+				<h3 sec:authorize="isAuthenticated()"> Precio : <span th:text=${precio}></span></h3>
 			</article>
 			<br>
 			<button>

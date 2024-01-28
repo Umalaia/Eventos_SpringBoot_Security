@@ -159,5 +159,12 @@ public class Evento implements Serializable {
 
 	        return precioPorEvento.multiply(BigDecimal.valueOf(cantidad));
 	    }
+	 
+	 
+	 public BigDecimal calcularPrecio(Reserva reserva) {
+	        BigDecimal precio = getPrecio();
+	        int cantidad = reserva.getCantidad();
+	        return precio.multiply(BigDecimal.valueOf(cantidad));
+	    }
 
 }

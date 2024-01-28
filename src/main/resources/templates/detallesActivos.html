@@ -50,6 +50,9 @@
 				<label sec:authorize="isAuthenticated()">Cantidad a reservar :</label>
 				<input sec:authorize="isAuthenticated()" id="cant" type="number" min="1" max="10" step="1" />
 			</article>
+			<article>
+				<h3 sec:authorize="isAuthenticated()"> Precio : <span></span></h3>
+			</article>
 			<br>
 			<button>
 				<a sec:authorize="isAuthenticated()" th:href="@{/misReservas}">Reservar</a>

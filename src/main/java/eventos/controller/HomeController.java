@@ -56,7 +56,7 @@ public class HomeController {
 	 * @param usuario	Objeto con la información de Usuario.
 	 * 					usuario.setEnabled(1);: Establece el estado del usuario como habilitado. El valor 1  significa "habilitado".
 	 * 					usuario.setFechaRegistro(new Date()); Establece la fecha de registro del usuario como la fecha actual.
-	 * 					usuario.addPerfil(pDao.verUnPerfil(3)); Añade un perfil al usuario. 
+	 * 					usuario.addPerfil(pDao.verUnPerfil(3)); Añade un perfil(cliente) al usuario. 
 						usuario.setPassword("{noop}" + usuario.getPassword()); Configura la contraseña del usuario. {noop} significa no encifrado o encriptado
 	 * @return			Redirige al usuario de vuelta a la página de registro ("/signup").
 	 */
@@ -97,7 +97,6 @@ public class HomeController {
 	}
 
 	
-
 	// LOGIN
 	/**
 	 * Este método se utiliza para manejar solicitudes GET a la página de login. Guarda la información del usuario en la sesión y luego
@@ -112,7 +111,6 @@ public class HomeController {
 	 * @return				Devuelve el nombre de la vista que se mostrará después de ejecutar este método
 	 * 						Por lo tanto, cuando se visita la URL "/login", se renderizará la vista de login.
 	 */
-
 	@GetMapping("/login")
 	public String procesarLogin(Authentication aut, Model model, HttpSession misesion,Usuario usuario) {
 		misesion.setAttribute("usuario", usuario);
@@ -130,8 +128,6 @@ public class HomeController {
 	 * @param ratt			Agrega un mensaje de error como atributo flash para mostrarlo después de la redirección.
 	 * @return				Redirige al usuario a la página de login ("/login").
 	 */
-	
-	
 	@PostMapping("/login")
 	public String procLogin(@RequestParam("username") String username, @RequestParam("password") String password,
 			HttpSession misesion, RedirectAttributes ratt) {
@@ -148,7 +144,6 @@ public class HomeController {
 
 
 	// HOME
-	
 	/**
 	 * Este método maneja solicitudes GET para la página principal. Verifica si hay un usuario autenticado,
 	 * ( muestra el nombre de usuario y su rol. En caso de que el usuario no este autentificado, agrega al modelo la información
@@ -164,7 +159,6 @@ public class HomeController {
 	 * @return				Devuelve el nombre de la vista que se mostrará después de ejecutar este método.
 	 * 						cuando se visita la URL "/" o "/home", se renderizará la vista "home".
 	 */
-
 	@GetMapping({"/", "/home"})
 	public String verIndex(Model model, Authentication aut, HttpSession misesion, Usuario usuario, Tipo tipo) {
 		 if (aut != null && aut.isAuthenticated()) {
@@ -211,7 +205,6 @@ public class HomeController {
 	 * @return				Devuelve el nombre de la vista que se mostrará después de ejecutar este método.
 	 * 						cuando se visita la URL "/eventosActivos", se renderizará la vista "eventosActivos".
 	 */
-	
 	@GetMapping("/eventosActivos")
 	public String verActivos(Model model, Authentication aut, HttpSession misesion) {
 

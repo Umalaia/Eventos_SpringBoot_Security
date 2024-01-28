@@ -58,6 +58,7 @@ public class ReservaController {
 	        return "redirect:/login";
 	    }
 	}
+	
 	/**
 	 * Este método maneja solicitudes GET para eliminar una reserva específica. Intenta eliminar la reserva con el identificador proporcionado, 
 	 * agrega un mensaje al modelo según el resultado y redirige al usuario de vuelta a la página de sus reservas.

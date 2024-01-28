@@ -4,37 +4,36 @@ import java.io.Serializable;
 import jakarta.persistence.*;
 import java.math.BigDecimal;
 
-
 /**
  * The persistent class for the reservas database table.
  * 
  */
 @Entity
-@Table(name="reservas")
-@NamedQuery(name="Reserva.findAll", query="SELECT r FROM Reserva r")
+@Table(name = "reservas")
+@NamedQuery(name = "Reserva.findAll", query = "SELECT r FROM Reserva r")
 public class Reserva implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="ID_RESERVA")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "ID_RESERVA")
 	private int idReserva;
 
 	private int cantidad;
 
 	private String observaciones;
 
-	@Column(name="PRECIO_VENTA")
+	@Column(name = "PRECIO_VENTA")
 	private BigDecimal precioVenta;
 
-	//uni-directional many-to-one association to Evento
+	// uni-directional many-to-one association to Evento
 	@ManyToOne
-	@JoinColumn(name="ID_EVENTO")
+	@JoinColumn(name = "ID_EVENTO")
 	private Evento evento;
 
-	//uni-directional many-to-one association to Usuario
+	// uni-directional many-to-one association to Usuario
 	@ManyToOne
-	@JoinColumn(name="USERNAME")
+	@JoinColumn(name = "USERNAME")
 	private Usuario usuario;
 
 	public Reserva() {
@@ -90,17 +89,36 @@ public class Reserva implements Serializable {
 	
 	
 	
-	 //Metodo para saber la cantidad que queda
-	 public int calcularCantidad() {
-		int aforo = evento.getAforoMaximo();
-		int cant = getCantidad();
-		if(aforo>cant) {
-		int rdo = aforo - cant;
-		return rdo;}
-		else return 0;
-	 }
-	
+	public Reserva(Evento evento) {
+	    this.evento = evento;
+	}
 
+
+	// Método para saber la cantidad que queda
+	public int calcularCantidad(int aforo, int cantidad) {
+	    if (this.evento != null) {
+	        int aforoMaximo = this.evento.getAforoMaximo();
+	        int cant = this.getCantidad();
+	        System.out.println("Aforo Máximo: " + aforoMaximo + ", Cantidad: " + cant);
+	        int rdo = aforoMaximo - cant;
+	        System.out.println("Resultado: " + rdo);
+	        return rdo;  
+	    } else {
+	        System.out.println("Evento es nulo");
+	        return 0;
+	    }
+	}
+
+
+	
+	/*
+	// Método para saber el precio
+	 public BigDecimal calcularPrecio(Reserva reserva) {
+	        BigDecimal precio = this.getPrecioVenta();
+	        int cant = this.getCantidad();
+	        BigDecimal resultado = precio.multiply(BigDecimal.valueOf(cant));
+	        return resultado;
+	    }
+
+*/
 }
-
-	
