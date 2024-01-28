@@ -88,6 +88,18 @@ public class Reserva implements Serializable {
 		this.usuario = usuario;
 	}
 	
+	
+	
+	 //Metodo para saber la cantidad que queda
+	 public int calcularCantidad() {
+		int aforo = evento.getAforoMaximo();
+		int cant = getCantidad();
+		if(aforo>cant) {
+		int rdo = aforo - cant;
+		return rdo;}
+		else return 0;
+	 }
+	
 
 }
 

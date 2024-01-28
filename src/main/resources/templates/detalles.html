@@ -47,7 +47,7 @@
 				<h3 sec:authorize="isAuthenticated()"> Quedan : <span></span></h3>
 			</article>
 			<article>
-				<label sec:authorize="isAuthenticated()">Cantidad a reservar :</label>
+				<label sec:authorize="isAuthenticated()">Cantidad a reservar : <span th:text="${cantidad}"></span></label>
 				<input sec:authorize="isAuthenticated()" id="cant" type="number" min="1" max="10" step="1" />
 			</article>
 			<br>

@@ -37,13 +37,14 @@ public class EventoController {
 	 */
 	
 	@GetMapping("/detalles/{id}")
-	public String detallesEventos (@PathVariable ("id") int idEvento, Model model, Usuario usuario) {
+	public String detallesEventos (@PathVariable ("id") int idEvento, Model model, Usuario usuario, Reserva reserva) {
 		Evento evento = eDao.verUnEvento(idEvento);
 		Usuario usu = uDao.verUsuario(usuario.getUsername());
 		model.addAttribute("evento", evento);
 		model.addAttribute("usuario", usu);
 		return "detalles";
 	}
+	
 	
 	@PostMapping("/detalles/{id}")
 	public String postAltaReserva(RedirectAttributes ratt, HttpSession misesion, @PathVariable ("id") int idEvento,
