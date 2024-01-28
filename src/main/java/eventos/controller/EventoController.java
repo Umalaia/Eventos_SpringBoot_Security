@@ -28,7 +28,13 @@ public class EventoController {
 	@Autowired
 	private ReservaDao rDao;
 	
-	//VER DETALLES
+	/**
+	 * Este método VER DETALLES, muestra una vista con el evento específico y el usuario
+	 * @param idEvento		Contiene el valor númerico de la variable asignada en la url
+	 * @param model			Es un objeto que se utiliza para pasar información entre el controlador y la vista.
+	 * @param usuario		Objeto el cual esta realizando la solicitud
+	 * @return				Devolverá la vista "detalles" utilizando la información proporcionada en el modelo
+	 */
 	
 	@GetMapping("/detalles/{id}")
 	public String detallesEventos (@PathVariable ("id") int idEvento, Model model, Usuario usuario) {
