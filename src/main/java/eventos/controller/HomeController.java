@@ -38,9 +38,9 @@ public class HomeController {
 	 * usuario visita la URL "/signup". Inicializa un objeto Usuario vacío y lo pasa
 	 * al modelo, luego redirige a la vista "registro".
 	 * 
-	 * @param model Parámetro, que se utiliza para pasar datos a la vista.
-	 * @return Devuelve el nombre de la vista que se mostrará después de ejecutar
-	 *         este método. "registro"
+	 * @param model 	Parámetro, que se utiliza para pasar datos a la vista.
+	 * @return 			Devuelve el nombre de la vista que se mostrará después de ejecutar
+	 *         			este método. "registro"
 	 */
 	@GetMapping("/signup")
 	public String registrar(Model model) {
@@ -54,16 +54,16 @@ public class HomeController {
 	 * y redirige al usuario a la página de inicio de sesión o de registro
 	 * dependiendo del resultado del registro.
 	 * 
-	 * @param model   Parámetro, que se utiliza para pasar datos a la vista.
-	 * @param usuario Objeto con la información de Usuario. usuario.setEnabled(1);:
-	 *                Establece el estado del usuario como habilitado. El valor 1
-	 *                significa "habilitado". usuario.setFechaRegistro(new Date());
-	 *                Establece la fecha de registro del usuario como la fecha
-	 *                actual. usuario.addPerfil(pDao.verUnPerfil(3)); Añade un
-	 *                perfil(cliente) al usuario. usuario.setPassword("{noop}" +
-	 *                usuario.getPassword()); Configura la contraseña del usuario.
-	 *                {noop} significa no encifrado o encriptado
-	 * @return Redirige al usuario de vuelta a la página de registro ("/signup").
+	 * @param model   	Parámetro, que se utiliza para pasar datos a la vista.
+	 * @param usuario 	Objeto con la información de Usuario. usuario.setEnabled(1);:
+	 *                	Establece el estado del usuario como habilitado. El valor 1
+	 *                	significa "habilitado". usuario.setFechaRegistro(new Date());
+	 *                	Establece la fecha de registro del usuario como la fecha
+	 *                	actual. usuario.addPerfil(pDao.verUnPerfil(3)); Añade un
+	 *                	perfil(cliente) al usuario. usuario.setPassword("{noop}" +
+	 *                	usuario.getPassword()); Configura la contraseña del usuario.
+	 *                	{noop} significa no encifrado o encriptado
+	 * @return 			Redirige al usuario de vuelta a la página de registro ("/signup").
 	 */
 	@PostMapping("/signup")
 	public String registrar(Model model, Usuario usuario, RedirectAttributes ratt) {
@@ -93,8 +93,8 @@ public class HomeController {
 	 * 
 	 *                 misesion.invalidate(); Invalida la sesión, y cierra la sesión
 	 *                 actual del usuario.
-	 * @return Después de cerrar la sesión, redirige al usuario a la página de
-	 *         inicio ("/home").
+	 * @return 		   Después de cerrar la sesión, redirige al usuario a la página de
+	 *         		   inicio ("/home").
 	 */
 	@GetMapping("/signout")
 	public String cerrarSesion(HttpSession misesion) {
@@ -109,17 +109,17 @@ public class HomeController {
 	 * Guarda la información del usuario en la sesión y luego redirige a la vista
 	 * "login"
 	 * 
-	 * @param aut      Toma información del objeto Usuario autentificado
-	 * @param model    Utilizado pasar datos a la vista.
-	 * @param misesion Usado para para manejar la sesión
-	 *                 misesion.setAttribute("usuario", usuario); Almacena el objeto
-	 *                 usuario en la sesión con el nombre de atributo "usuario". la
-	 *                 información del usuario se guarda en la sesión para ser
-	 *                 utilizada en sesiones posteriores.
-	 * @param usuario  Objeto usuario con la información del mismo.
-	 * @return Devuelve el nombre de la vista que se mostrará después de ejecutar
-	 *         este método Por lo tanto, cuando se visita la URL "/login", se
-	 *         renderizará la vista de login.
+	 * @param aut      	Toma información del objeto Usuario autentificado
+	 * @param model    	Utilizado pasar datos a la vista.
+	 * @param misesion 	Usado para para manejar la sesión
+	 *                 	misesion.setAttribute("usuario", usuario); Almacena el objeto
+	 *                 	usuario en la sesión con el nombre de atributo "usuario". la
+	 *                 	información del usuario se guarda en la sesión para ser
+	 *                 	utilizada en sesiones posteriores.
+	 * @param usuario  	Objeto usuario con la información del mismo.
+	 * @return 		   	Devuelve el nombre de la vista que se mostrará después de ejecutar
+	 *         		   	este método Por lo tanto, cuando se visita la URL "/login", se
+	 *                	 renderizará la vista de login.
 	 */
 	@GetMapping("/login")
 	public String procesarLogin(Authentication aut, Model model, HttpSession misesion, Usuario usuario) {
@@ -135,12 +135,12 @@ public class HomeController {
 	 * autenticación falla, agrega un mensaje de error y redirige al usuario de
 	 * vuelta a la página de login.
 	 * 
-	 * @param username Parametro donde indica el nombre
-	 * @param password Parametro donde indica el password
-	 * @param misesion Objeto para controlar la sesión.
-	 * @param ratt     Agrega un mensaje de error como atributo flash para mostrarlo
-	 *                 después de la redirección.
-	 * @return Redirige al usuario a la página de login ("/login").
+	 * @param username 	Parametro donde indica el nombre
+	 * @param password 	Parametro donde indica el password
+	 * @param misesion 	Objeto para controlar la sesión.
+	 * @param ratt     	Agrega un mensaje de error como atributo flash para mostrarlo
+	 *                 	después de la redirección.
+	 * @return 			Redirige al usuario a la página de login ("/login").
 	 */
 	@PostMapping("/login")
 	public String procLogin(@RequestParam("username") String username, @RequestParam("password") String password,
@@ -158,7 +158,16 @@ public class HomeController {
 
 	
 	// HOME
-
+	/**
+	 * Este método Verifica la autenticación del usuario, obtiene eventos y tipos de eventos, y luego devuelve la vista "home"
+	 * con los datos correspondientes.
+	 * 
+	 * @param model		Representa el modelo que se utilizará para almacenar datos y pasarlos a la vista.
+	 * @param aut		Proporciona información sobre la autenticación del usuario.
+	 * @param misesion	Representa la sesión HTTP y se utiliza para almacenar información entre diferentes solicitudes.
+	 * @param tipo		Objeto de tipo, indicando el tipo de evento.
+	 * @return
+	 */
 	@GetMapping({ "/", "/home" })
 	public String verIndex(Model model, Authentication aut, HttpSession misesion, Tipo tipo) {
 		if (aut != null && aut.isAuthenticated()) {
@@ -194,9 +203,9 @@ public class HomeController {
 	 * modelo antes de redirigir al usuario a la vista "eventosActivos".
 	 * 
 	 * @param model    Para pasar datos a la vista
-	 * @return Devuelve el nombre de la vista que se mostrará después de ejecutar
-	 *         este método. cuando se visita la URL "/eventosActivos", se
-	 *         renderizará la vista "eventosActivos".
+	 * @return 		   Devuelve el nombre de la vista que se mostrará después de ejecutar
+	 *         		   este método. cuando se visita la URL "/eventosActivos", se
+	 *         		   renderizará la vista "eventosActivos".
 	 */
 	@GetMapping("/eventosActivos")
 	public String verActivos(Model model) {
@@ -214,9 +223,9 @@ public class HomeController {
 	 * "eventosDestacados".
 	 * 
 	 * @param model    Para pasar datos a la vista
-	 * @return Devuelve el nombre de la vista que se mostrará después de ejecutar
-	 *         este método. Por lo tanto, cuando se visita la URL
-	 *         "/eventosDestacados", se renderizará la vista "eventosDestacados".
+	 * @return 		   Devuelve el nombre de la vista que se mostrará después de ejecutar
+	 *         		   este método. Por lo tanto, cuando se visita la URL
+	 *                 "/eventosDestacados", se renderizará la vista "eventosDestacados".
 	 */
 	@GetMapping("/eventosDestacados")
 	public String verDestacados(Model model) {
@@ -232,13 +241,13 @@ public class HomeController {
 	 * la lista de eventos destacados a través de un objeto eDao y la agrega al
 	 * modelo antes de redirigir al usuario a la vista "detalles".
 	 * 
-	 * @param model    Para pasar datos a la vista
-	 * @param aut      Objeto para manejar la información de autenticación del
-	 *                 usuario
-	 * @param misesion Objeto para controlar la sesión.
-	 * @return Devuelve el nombre de la vista que se mostrará después de ejecutar
-	 *         este método. cuando se visita la URL "/detalles", se renderizará la
-	 *         vista "detalles".
+	 * @param model    	Para pasar datos a la vista
+	 * @param aut      	Objeto para manejar la información de autenticación del
+	 *                 	usuario
+	 * @param misesion 	Objeto para controlar la sesión.
+	 * @return 			Devuelve el nombre de la vista que se mostrará después de ejecutar
+	 *         			este método. cuando se visita la URL "/detalles", se renderizará la
+	 *         			vista "detalles".
 	 */
 	@GetMapping("/detalles")
 	public String verDetalles(Model model) {
