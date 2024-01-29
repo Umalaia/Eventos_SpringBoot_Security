@@ -1,22 +1,16 @@
 package eventos.controller;
 
-import java.math.BigDecimal;
-import java.util.List;
 
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
-import eventos.modelo.dao.EventoDao;
 import eventos.modelo.dao.ReservaDao;
 import eventos.modelo.dao.UsuarioDao;
-import eventos.modelo.entitis.Evento;
 import eventos.modelo.entitis.Reserva;
 import eventos.modelo.entitis.Usuario;
 import jakarta.servlet.http.HttpSession;
@@ -30,8 +24,6 @@ public class ReservaController {
 	@Autowired
 	private UsuarioDao uDao;
 	
-	@Autowired
-	private EventoDao eDao;
 	
 	/**
 	 * Este método maneja solicitudes GET para mostrar las reservas de un usuario. Verifica si hay un usuario autenticado, 
@@ -59,11 +51,7 @@ public class ReservaController {
 	    }
 	}
 	
-	
 
-
-	
-	
 	
 	/**
 	 * Este método maneja solicitudes GET para eliminar una reserva específica. Intenta eliminar la reserva con el identificador proporcionado, 

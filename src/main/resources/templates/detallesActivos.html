@@ -44,19 +44,24 @@
 		</table>
 		<section>
 			<article>
-				<h3 sec:authorize="isAuthenticated()"> Quedan : <span></span></h3>
+				<h3 sec:authorize="isAuthenticated()"> Quedan : <span th:text="${cantidad}"></span></h3>
 			</article>
 			<article>
-				<label sec:authorize="isAuthenticated()">Cantidad a reservar :</label>
-				<input sec:authorize="isAuthenticated()" id="cant" type="number" min="1" max="10" step="1" />
-			</article>
+				<form method="post" th:if="${evento.estado != 'Cancelado'} AND ${limiteMaximo != 0}">
+					<label sec:authorize="isAuthenticated()">Cantidad a reservar : </label>
+					<select name="cantidad">
+                     	<option th:each="i : ${#numbers.sequence(1, limiteMaximo)}" th:value="${i}" th:text="${i}"></option>
+                	</select>
+                	<br><br>
+                	<textarea placeholder="Observaciones" name="observaciones"></textarea>
+                	<br><br>
+               		<button type="submit" sec:authorize="isAuthenticated()">Reservar</button>
+                </form>
+			</article>	
 			<article>
-				<h3 sec:authorize="isAuthenticated()"> Precio : <span></span></h3>
-			</article>
-			<br>
-			<button>
-				<a sec:authorize="isAuthenticated()" th:href="@{/misReservas}">Reservar</a>
-			</button>
+			<h3 th:if="${limiteMaximo == 0}"> No se pueden hacer mas reservas de este evento, ya que has alcanzado el límite de reservas</h3>
+			<h3 th:if="${evento.estado == 'Cancelado'}"> No se puede hacer una reserva ya que el evento está cancelado</h3>
+			</article>		
 		</section>
 	</main>
 </body>

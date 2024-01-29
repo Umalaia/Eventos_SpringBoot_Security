@@ -94,13 +94,24 @@ public class EventoController {
 	 *  			 		vista se llama "detallesDestacado".
 	 */
 	@GetMapping("/eventosDestacados/verDetalles/{id}")
-	public String detallesEventosDestacados (@PathVariable ("id") int idEvento, Model model, Usuario usuario) {
-		Evento evento = eDao.verUnEvento(idEvento);
-		Usuario usu = uDao.verUsuario(usuario.getUsername());
-		model.addAttribute("evento", evento);
-		model.addAttribute("usuario", usu);
+	public String detallesEventosDestacados (@PathVariable ("id") int idEvento, Model model, Authentication auth) {
+		 Evento evento = eDao.verUnEvento(idEvento);
+		    auth = SecurityContextHolder.getContext().getAuthentication();
+	        String usu = auth.getName();
+
+		    int cantidadDisponible = evento.getAforoMaximo() - rDao.cantReservas(idEvento);
+		    int limiteMaximo = 10 - rDao.rvasPorUsuarioYEvento(idEvento, usu);
+
+		    model.addAttribute("evento", evento);
+		    model.addAttribute("usuario", usu);
+		    model.addAttribute("cantidad", cantidadDisponible);
+		    model.addAttribute("limiteMaximo", limiteMaximo);
 		return "detallesDestacado";
 	}
+	
+	
+	
+	
 	
 	/**
 	 * Este método se utiliza para realizar una reserva después de visualizar los detalles de un evento destacado. 
@@ -112,11 +123,21 @@ public class EventoController {
 	 * @return				Después de realizar la reserva satisfactoriamente, redirige al usuario a la página "/misReservas".
 	 */
 	@PostMapping("/eventosDestacados/verDetalles/{id}")
-	public String postAltaReservaDes(RedirectAttributes ratt, @PathVariable ("id") int idEvento, Usuario usuario) {
-		
-		ratt.addFlashAttribute("mensaje", "Reserva realizada con éxito");
-		return "redirect:/misReservas";
+	public String realizarReservaDestacado(@PathVariable ("id") int idEvento, @RequestParam int cantidad, @RequestParam String observaciones, Authentication auth) {
+        auth = SecurityContextHolder.getContext().getAuthentication();
+        String username = auth.getName();
+        Evento evento = eDao.verUnEvento(idEvento);
+        
+        BigDecimal precioVenta =  evento.getPrecio().multiply(BigDecimal.valueOf(cantidad));
+        Reserva reserva = new Reserva(cantidad, observaciones, precioVenta, evento, uDao.verUsuario(username));
+        
+        rDao.realizarReserva(reserva);
+        return "redirect:/misReservas";
 	}
+	
+	
+	
+	
 	
 	/**
 	 * Este método se encarga de mostrar los detalles de un evento activo, obteniendo la información necesaria del evento
@@ -130,29 +151,37 @@ public class EventoController {
 	 * 						"detallesActivos".
 	 */
 	@GetMapping("/eventosActivos/verDetalles/{id}")
-	public String detallesEventosActivos (@PathVariable ("id") int idEvento, Model model, Usuario usuario) {
-		Evento evento = eDao.verUnEvento(idEvento);
-		Usuario usu = uDao.verUsuario(usuario.getUsername());
-		model.addAttribute("evento", evento);
-		model.addAttribute("usuario", usu);
+	public String detallesEventosActivos (@PathVariable ("id") int idEvento, Model model, Authentication auth) {
+		 Evento evento = eDao.verUnEvento(idEvento);
+		    auth = SecurityContextHolder.getContext().getAuthentication();
+	        String usu = auth.getName();
+
+		    int cantidadDisponible = evento.getAforoMaximo() - rDao.cantReservas(idEvento);
+		    int limiteMaximo = 10 - rDao.rvasPorUsuarioYEvento(idEvento, usu);
+
+		    model.addAttribute("evento", evento);
+		    model.addAttribute("usuario", usu);
+		    model.addAttribute("cantidad", cantidadDisponible);
+		    model.addAttribute("limiteMaximo", limiteMaximo);
 		return "detallesActivos";
 	}
 	
-	/**
-	 * Este método procesa una solicitud POST para realizar una reserva después de ver los detalles de un evento activo.
-	 * Agrega un mensaje de éxito como atributo flash y redirige al usuario a la página de "misReservas".
-	 * 
-	 * @param ratt			Utilizado para Agrega un mensaje de la reserva satisfactoriamente.
-	 * @param idEvento		Identificador del evento	
-	 * @param usuario		Objeto con la información del usuario
-	 * @return				Después de realizar la reserva, redirige al usuario a la página "/misReservas"
-	 */
+	
+	
 	@PostMapping("/eventosActivos/verDetalles/{id}")
-	public String postAltaReservaAct(RedirectAttributes ratt, @PathVariable ("id") int idEvento, Usuario usuario) {
-		
-		ratt.addFlashAttribute("mensaje", "Reserva realizada con éxito");
-		return "redirect:/misReservas";
+	public String realizarReservaActivos(@PathVariable ("id") int idEvento, @RequestParam int cantidad, @RequestParam String observaciones, Authentication auth) {
+        auth = SecurityContextHolder.getContext().getAuthentication();
+        String username = auth.getName();
+        Evento evento = eDao.verUnEvento(idEvento);
+        
+        BigDecimal precioVenta =  evento.getPrecio().multiply(BigDecimal.valueOf(cantidad));
+        Reserva reserva = new Reserva(cantidad, observaciones, precioVenta, evento, uDao.verUsuario(username));
+        
+        rDao.realizarReserva(reserva);
+        return "redirect:/misReservas";
 	}
+	
+
 	
 	
 }
