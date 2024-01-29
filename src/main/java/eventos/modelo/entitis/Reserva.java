@@ -38,6 +38,15 @@ public class Reserva implements Serializable {
 
 	public Reserva() {
 	}
+	
+	public Reserva(int cantidad, String observaciones, BigDecimal precioVenta, Evento evento, Usuario usuario) {
+		super();
+		this.cantidad = cantidad;
+		this.observaciones = observaciones;
+		this.precioVenta = precioVenta;
+		this.evento = evento;
+		this.usuario = usuario;
+	}
 
 	public int getIdReserva() {
 		return this.idReserva;
@@ -92,33 +101,6 @@ public class Reserva implements Serializable {
 	public Reserva(Evento evento) {
 	    this.evento = evento;
 	}
-
-
-	// Método para saber la cantidad que queda
-	public int calcularCantidad(int aforo, int cantidad) {
-	    if (this.evento != null) {
-	        int aforoMaximo = this.evento.getAforoMaximo();
-	        int cant = this.getCantidad();
-	        System.out.println("Aforo Máximo: " + aforoMaximo + ", Cantidad: " + cant);
-	        int rdo = aforoMaximo - cant;
-	        System.out.println("Resultado: " + rdo);
-	        return rdo;  
-	    } else {
-	        System.out.println("Evento es nulo");
-	        return 0;
-	    }
-	}
-
-
+		
 	
-	/*
-	// Método para saber el precio
-	 public BigDecimal calcularPrecio(Reserva reserva) {
-	        BigDecimal precio = this.getPrecioVenta();
-	        int cant = this.getCantidad();
-	        BigDecimal resultado = precio.multiply(BigDecimal.valueOf(cant));
-	        return resultado;
-	    }
-
-*/
 }

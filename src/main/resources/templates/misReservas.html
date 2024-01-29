@@ -26,6 +26,7 @@
 			<th>Fecha de inicio</th>
 			<th>Cantidad</th>
 			<th>Precio de venta</th>
+			<th>Observaciones</th>
 			<th>Cancelar reserva</th>
 		</tr>
 		<tr th:each="reserva : ${reservas}">
@@ -33,6 +34,7 @@
 			<td th:text="${reserva.evento.fechaInicio}"></td>
 			<td th:text="${reserva.cantidad}"></td>
 			<td th:text="${reserva.precioVenta}"></td>
+			<td th:text="${reserva.observaciones}"></td>
 			<td><a sec:authorize="isAuthenticated()" th:href="@{/misReservas/eliminar/{id}(id=${reserva.idReserva})}">Cancelar</a></td>
 		</tr>
 	</table>

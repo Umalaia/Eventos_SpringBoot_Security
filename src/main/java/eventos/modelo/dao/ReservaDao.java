@@ -11,6 +11,8 @@ public interface ReservaDao {
 	Reserva verUnaReserva(int idReserva);
 	List<Reserva> verReservas();
 	List<Reserva> verReservasPorUsuario( Usuario usuario);
-	void realizarReserva(Evento evento, Reserva reserva, Usuario usuario);
+	boolean realizarReserva(Reserva reserva);
+	int cantReservas(int idEvento);
+	int rvasPorUsuarioYEvento(int idEvento, String username);
 
 }

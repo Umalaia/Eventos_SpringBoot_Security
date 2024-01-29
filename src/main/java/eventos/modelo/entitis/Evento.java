@@ -149,22 +149,5 @@ public class Evento implements Serializable {
 		this.tipo = tipo;
 	}
 	
-	
-	//Metodo calcular precio total de la reserva segun la cantidad que marques
-	
-	 public BigDecimal calcularPrecioTotal(BigDecimal precioPorEvento, int cantidad) {
-	        if (cantidad <= 0) {
-	            throw new IllegalArgumentException("La cantidad debe ser mayor que cero.");
-	        }
-
-	        return precioPorEvento.multiply(BigDecimal.valueOf(cantidad));
-	    }
-	 
-	 
-	 public BigDecimal calcularPrecio(Reserva reserva) {
-	        BigDecimal precio = getPrecio();
-	        int cantidad = reserva.getCantidad();
-	        return precio.multiply(BigDecimal.valueOf(cantidad));
-	    }
 
 }

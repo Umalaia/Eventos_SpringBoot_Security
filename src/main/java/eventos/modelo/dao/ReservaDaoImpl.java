@@ -46,18 +46,20 @@ public class ReservaDaoImpl implements ReservaDao{
 
 	
 	@Override
-	public void realizarReserva(Evento evento, Reserva reserva, Usuario usuario) {
-	    BigDecimal precio = evento.getPrecio();
-	    int cantidad = reserva.getCantidad();
-	    BigDecimal precioTotal = evento.calcularPrecioTotal(precio, cantidad);
+	public boolean realizarReserva(Reserva reserva) {
+	    rRepo.save(reserva);
+	    return true;
+	}
 
-	    Reserva rva = new Reserva();
-	    rva.setEvento(evento);
-	    rva.setCantidad(cantidad);
-	    rva.setUsuario(usuario);
-	    rva.setPrecioVenta(precioTotal);
+	
+	@Override
+	public int cantReservas(int idEvento) {
+		return rRepo.cantidadReservas(idEvento);
+	}
 
-	    rRepo.save(rva);
+	@Override
+	public int rvasPorUsuarioYEvento(int idEvento, String username) {
+		return rRepo.reservasPorUsuarioYEvento(idEvento, username);
 	}
 
 	

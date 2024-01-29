@@ -1,13 +1,17 @@
 package eventos.controller;
 
+
 import java.math.BigDecimal;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import eventos.modelo.dao.EventoDao;
@@ -40,47 +44,42 @@ public class EventoController {
 	 */
 	
 	@GetMapping("/detalles/{id}")
-	public String detallesEventos (@PathVariable("id") int idEvento, Model model, Usuario usuario, Reserva reserva) {
+	public String detallesEventos (@PathVariable("id") int idEvento, Model model,Authentication auth, Reserva reserva) {
 	    Evento evento = eDao.verUnEvento(idEvento);
-	    Usuario usu = uDao.verUsuario(usuario.getUsername());
+	    auth = SecurityContextHolder.getContext().getAuthentication();
+        String usu = auth.getName();
 
-	    // Calcular cantidad utilizando los métodos de Reserva
-	    int cantidadDisponible = reserva.calcularCantidad(evento.getAforoMaximo(), reserva.getCantidad());
-
-	    // Calcular precio utilizando el método de Reserva
-	   // BigDecimal precioTotal = rva.calcularPrecio(evento);
+	    int cantidadDisponible = evento.getAforoMaximo() - rDao.cantReservas(idEvento);
+	    int limiteMaximo = 10 - rDao.rvasPorUsuarioYEvento(idEvento, usu);
 
 	    model.addAttribute("evento", evento);
 	    model.addAttribute("usuario", usu);
 	    model.addAttribute("cantidad", cantidadDisponible);
-	    //model.addAttribute("precio", precioTotal);
+	    model.addAttribute("limiteMaximo", limiteMaximo);
 
 	    return "detalles";
 	}
 
 	
-	/**
-	 * Este método sirve para crear una reserva para un evento específico, una vez realizada la reserva retorna
-	 * a la página mis reservas con el mensaje satisfactorio de reserva realizada.
-	 * 
-	 * @param ratt		 Objeto  para agregar atributos que deben enviarse a la vista después de la redirección.
-	 * @param misesion   Agrega un objeto HttpSession, que se utiliza para mantener la información del usuario entre diferentes solicitudes.
-	 * @param idEvento   Es el indentificador del evento al que se desea realizar la reserva
-	 * @param evento	 Objeto con la información del evento especifico
-	 * @param usuario	 Objeto con la información del usuario
-	 * @param reserva	 Objeto con la información de la reserva 
-	 * @return		     Redirige a la vista misReservas
-	 */
+	
 	@PostMapping("/detalles/{id}")
-	public String postAltaReserva(RedirectAttributes ratt, HttpSession misesion, @PathVariable ("id") int idEvento,
-			Evento evento, Usuario usuario, Reserva reserva) {
-		Usuario usu = (Usuario)misesion.getAttribute(usuario.getUsername());
-		Reserva rva = new Reserva();
-		rva.setEvento(evento);
-		
-		ratt.addFlashAttribute("mensaje", "Reserva realizada con éxito");
-		return "redirect:/misReservas";
-	}
+    public String realizarReserva(@PathVariable ("id") int idEvento, @RequestParam int cantidad, @RequestParam String observaciones, Authentication auth) {
+        auth = SecurityContextHolder.getContext().getAuthentication();
+        String username = auth.getName();
+        Evento evento = eDao.verUnEvento(idEvento);
+        
+        BigDecimal precioVenta =  evento.getPrecio().multiply(BigDecimal.valueOf(cantidad));
+        Reserva reserva = new Reserva(cantidad, observaciones, precioVenta, evento, uDao.verUsuario(username));
+        
+        rDao.realizarReserva(reserva);
+        return "redirect:/misReservas";
+    }
+	
+	
+	
+	
+	
+	
 	
 	/**
 	 * Este método se encarga de mostrar los detalles de un evento destacado, obteniendo la información necesaria del evento
