@@ -49,11 +49,11 @@
 			<article>
 				<form th:action="@{/detalles/{id} (id=${evento.idEvento})}" method="post" th:if="${evento.estado != 'Cancelado'} AND ${limiteMaximo != 0}">
 					<label sec:authorize="isAuthenticated()">Cantidad a reservar : </label>
-					<select name="cantidad">
+					<select sec:authorize="isAuthenticated()" name="cantidad">
                      	<option th:each="i : ${#numbers.sequence(1, limiteMaximo)}" th:value="${i}" th:text="${i}"></option>
                 	</select>
                 	<br><br>
-                	<textarea placeholder="Observaciones" name="observaciones"></textarea>
+                	<textarea sec:authorize="isAuthenticated()" placeholder="Observaciones" name="observaciones"></textarea>
                 	<br><br>
                		<button type="submit" sec:authorize="isAuthenticated()">Reservar</button>
                 </form>
