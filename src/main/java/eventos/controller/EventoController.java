@@ -37,14 +37,19 @@ public class EventoController {
 		auth = SecurityContextHolder.getContext().getAuthentication();
 		String usu = auth.getName();
 
+		if(eDao.verUnEvento(idEvento).getEstado() == "Activo") {
 		int cantidadDisponible = evento.getAforoMaximo() - rDao.cantReservas(idEvento);
 		int limiteMaximo = 10 - rDao.rvasPorUsuarioYEvento(idEvento, usu);
-
-		model.addAttribute("evento", evento);
-		model.addAttribute("usuario", usu);
 		model.addAttribute("cantidad", cantidadDisponible);
 		model.addAttribute("limiteMaximo", limiteMaximo);
-
+		}
+		else {
+		
+		model.addAttribute("evento", evento);
+		model.addAttribute("usuario", usu);
+		model.addAttribute("cantidad", 0);
+		model.addAttribute("limiteMaximo", 0);
+		}
 		return "detalles";
 	}
 
@@ -70,13 +75,19 @@ public class EventoController {
 		auth = SecurityContextHolder.getContext().getAuthentication();
 		String usu = auth.getName();
 
-		int cantidadDisponible = evento.getAforoMaximo() - rDao.cantReservas(idEvento);
-		int limiteMaximo = 10 - rDao.rvasPorUsuarioYEvento(idEvento, usu);
-
-		model.addAttribute("evento", evento);
-		model.addAttribute("usuario", usu);
-		model.addAttribute("cantidad", cantidadDisponible);
-		model.addAttribute("limiteMaximo", limiteMaximo);
+		if(eDao.verUnEvento(idEvento).getEstado() == "Activo") {
+			int cantidadDisponible = evento.getAforoMaximo() - rDao.cantReservas(idEvento);
+			int limiteMaximo = 10 - rDao.rvasPorUsuarioYEvento(idEvento, usu);
+			model.addAttribute("cantidad", cantidadDisponible);
+			model.addAttribute("limiteMaximo", limiteMaximo);
+			}
+			else {
+			
+			model.addAttribute("evento", evento);
+			model.addAttribute("usuario", usu);
+			model.addAttribute("cantidad", 0);
+			model.addAttribute("limiteMaximo", 0);
+			}
 		return "detallesDestacado";
 	}
 
@@ -103,13 +114,19 @@ public class EventoController {
 		auth = SecurityContextHolder.getContext().getAuthentication();
 		String usu = auth.getName();
 
-		int cantidadDisponible = evento.getAforoMaximo() - rDao.cantReservas(idEvento);
-		int limiteMaximo = 10 - rDao.rvasPorUsuarioYEvento(idEvento, usu);
-
-		model.addAttribute("evento", evento);
-		model.addAttribute("usuario", usu);
-		model.addAttribute("cantidad", cantidadDisponible);
-		model.addAttribute("limiteMaximo", limiteMaximo);
+		if(eDao.verUnEvento(idEvento).getEstado() == "Activo") {
+			int cantidadDisponible = evento.getAforoMaximo() - rDao.cantReservas(idEvento);
+			int limiteMaximo = 10 - rDao.rvasPorUsuarioYEvento(idEvento, usu);
+			model.addAttribute("cantidad", cantidadDisponible);
+			model.addAttribute("limiteMaximo", limiteMaximo);
+			}
+			else {
+			
+			model.addAttribute("evento", evento);
+			model.addAttribute("usuario", usu);
+			model.addAttribute("cantidad", 0);
+			model.addAttribute("limiteMaximo", 0);
+			}
 		return "detallesActivos";
 	}
 
