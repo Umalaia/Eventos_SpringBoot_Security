@@ -9,11 +9,9 @@ import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
 import eventos.modelo.dao.EventoDao;
 import eventos.modelo.dao.PerfilDao;
 import eventos.modelo.dao.TipoDao;
@@ -95,12 +93,11 @@ public class HomeController {
 	 * 
 	 *                 misesion.invalidate(); Invalida la sesión, y cierra la sesión
 	 *                 actual del usuario.
-	 * @param usuario  Objeto con la información de Usuario.
 	 * @return Después de cerrar la sesión, redirige al usuario a la página de
 	 *         inicio ("/home").
 	 */
 	@GetMapping("/signout")
-	public String cerrarSesion(HttpSession misesion, Usuario usuario) {
+	public String cerrarSesion(HttpSession misesion) {
 		misesion.removeAttribute("usuario");
 		misesion.invalidate();
 		return "redirect:/home";
@@ -159,28 +156,11 @@ public class HomeController {
 		return "redirect:/login";
 	}
 
+	
 	// HOME
-	/**
-	 * Este método maneja solicitudes GET para la página principal. Verifica si hay
-	 * un usuario autenticado, ( muestra el nombre de usuario y su rol. En caso de
-	 * que el usuario no este autentificado, agrega al modelo la información de que
-	 * el usuario es un invitado, mostrando en las vistas como usuario no
-	 * autentificado. recopila información sobre eventos destacados y activos, así
-	 * como todos los tipos de eventos, y luego pasa esta información al modelo
-	 * antes de redirigir al usuario a la vista "home".
-	 * 
-	 * @param model    Toma un objeto Model para pasar datos a la vista
-	 * @param aut      Objeto para manejar la información de autenticación del
-	 *                 usuario
-	 * @param misesion Objeto para controlar la sesión.
-	 * @param usuario  Objeto usuario con la información del mismo.
-	 * @param tipo     Objet tipo para saber el tipo de evento
-	 * @return Devuelve el nombre de la vista que se mostrará después de ejecutar
-	 *         este método. cuando se visita la URL "/" o "/home", se renderizará la
-	 *         vista "home".
-	 */
+
 	@GetMapping({ "/", "/home" })
-	public String verIndex(Model model, Authentication aut, HttpSession misesion, Usuario usuario, Tipo tipo) {
+	public String verIndex(Model model, Authentication aut, HttpSession misesion, Tipo tipo) {
 		if (aut != null && aut.isAuthenticated()) {
 			System.out.println(aut.getName() + " - " + aut.getAuthorities());
 		} else {
@@ -214,20 +194,13 @@ public class HomeController {
 	 * modelo antes de redirigir al usuario a la vista "eventosActivos".
 	 * 
 	 * @param model    Para pasar datos a la vista
-	 * @param aut      Objeto para manejar la información de autenticación del
-	 *                 usuario
-	 * @param misesion Objeto para controlar la sesión.
 	 * @return Devuelve el nombre de la vista que se mostrará después de ejecutar
 	 *         este método. cuando se visita la URL "/eventosActivos", se
 	 *         renderizará la vista "eventosActivos".
 	 */
 	@GetMapping("/eventosActivos")
-	public String verActivos(Model model, Authentication aut, HttpSession misesion) {
+	public String verActivos(Model model) {
 
-		// Obtener eventos activos
-		/**
-		 * Obtiene una lista de eventos activos utilizando un objeto eDao
-		 */
 		List<Evento> activos = eDao.verEventosActivos();
 		model.addAttribute("activos", activos);
 
@@ -241,15 +214,12 @@ public class HomeController {
 	 * "eventosDestacados".
 	 * 
 	 * @param model    Para pasar datos a la vista
-	 * @param aut      Objeto para manejar la información de autenticación del
-	 *                 usuario
-	 * @param misesion Objeto para controlar la sesión.
 	 * @return Devuelve el nombre de la vista que se mostrará después de ejecutar
 	 *         este método. Por lo tanto, cuando se visita la URL
 	 *         "/eventosDestacados", se renderizará la vista "eventosDestacados".
 	 */
 	@GetMapping("/eventosDestacados")
-	public String verDestacados(Model model, Authentication aut, HttpSession misesion) {
+	public String verDestacados(Model model) {
 
 		List<Evento> destacados = eDao.verEventosDestacados();
 		model.addAttribute("destacados", destacados);
@@ -271,7 +241,7 @@ public class HomeController {
 	 *         vista "detalles".
 	 */
 	@GetMapping("/detalles")
-	public String verDetalles(Model model, Authentication aut, HttpSession misesion) {
+	public String verDetalles(Model model) {
 
 		List<Evento> destacados = eDao.verEventosDestacados();
 		model.addAttribute("destacados", destacados);

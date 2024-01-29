@@ -11,7 +11,6 @@ import eventos.modelo.dao.ReservaDao;
 import eventos.modelo.dao.UsuarioDao;
 import eventos.modelo.entitis.Reserva;
 import eventos.modelo.entitis.Usuario;
-import jakarta.servlet.http.HttpSession;
 
 @Controller
 public class ReservaController {
@@ -22,6 +21,7 @@ public class ReservaController {
 	@Autowired
 	private UsuarioDao uDao;
 
+	// VER MIS RESERVAS
 	/**
 	 * Este método maneja solicitudes GET para mostrar las reservas de un usuario.
 	 * Verifica si hay un usuario autenticado, obtiene la información del usuario y
@@ -32,14 +32,12 @@ public class ReservaController {
 	 * @param model    Para pasar datos a la vista
 	 * @param aut      Objeto para manejar la información de autenticación del
 	 *                 usuario
-	 * @param misesion Objeto para controlar la sesión.
-	 * @param usuario  Objeto usuario con la información del mismo.
 	 * @return Devuelve el nombre de la vista que se mostrará después de ejecutar
 	 *         este método "misReservas". En caso de que el usuario no este
 	 *         autentificado redirige a la página ("/login").
 	 */
 	@GetMapping("/misReservas")
-	public String verMisReservas(Model model, Authentication aut, HttpSession misesion) {
+	public String verMisReservas(Model model, Authentication aut) {
 		if (aut != null && aut.isAuthenticated()) {
 			String nombreUsuario = aut.getName();
 
@@ -52,6 +50,7 @@ public class ReservaController {
 		}
 	}
 
+	// ELIMINAR RESERVA
 	/**
 	 * Este método maneja solicitudes GET para eliminar una reserva específica.
 	 * Intenta eliminar la reserva con el identificador proporcionado, agrega un
