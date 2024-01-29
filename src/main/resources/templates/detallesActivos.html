@@ -59,8 +59,8 @@
                 </form>
 			</article>	
 			<article>
-			<h3 th:if="${limiteMaximo == 0}"> No se pueden hacer mas reservas de este evento, ya que has alcanzado el límite de reservas</h3>
-			<h3 th:if="${evento.estado == 'Inactivo'}"> No se puede hacer una reserva ya que el evento está cancelado</h3>
+			<h3 th:if="${limiteMaximo == 0}"> No se pueden hacer mas reservas de este evento</h3>
+			<h3 th:if="${evento.estado == 'Inactivo'}">El evento está cancelado</h3>
 			</article>		
 		</section>
 	</main>
