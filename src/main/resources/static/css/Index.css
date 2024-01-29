@@ -41,6 +41,7 @@ nav {
 
 
 button {
+	color: #030b67;
 	background: #ebfbfe;
 	border: 1px solid #6c9df9;
 	padding: 8px;
@@ -141,7 +142,6 @@ td {
 #seccion{
 	display: flex;
 	align-content: center;
-	align-items: center;
 }
 
 /** POR CLASE **/

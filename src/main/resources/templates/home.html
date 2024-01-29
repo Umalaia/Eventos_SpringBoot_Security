@@ -18,17 +18,17 @@
 				<button>
 					<a th:href="@{/eventosActivos}">Eventos Activos</a>
 				</button>
-				<button>
-					<a  sec:authorize="isAuthenticated()" th:href="@{/misReservas}">Mis reservas</a>
+				<button sec:authorize="isAuthenticated()">
+					<a th:href="@{/misReservas}">Mis reservas</a>
 				</button>
-				<button>
-					<a  sec:authorize="isAuthenticated()" th:href="@{/signout}">Cerrar sesión</a>
+				<button sec:authorize="isAuthenticated()">
+					<a th:href="@{/signout}">Cerrar sesión</a>
 				</button>
-				<button>
-					<a sec:authorize="!isAuthenticated()" th:href="@{/login}">Login</a>
+				<button sec:authorize="!isAuthenticated()">
+					<a th:href="@{/login}">Login</a>
 				</button>
-				<button>
-					<a sec:authorize="!isAuthenticated()" th:href="@{/signup}">Registro</a>
+				<button sec:authorize="!isAuthenticated()">
+					<a th:href="@{/signup}">Registro</a>
 				</button>
 			</div>
 		</nav>
@@ -55,7 +55,7 @@
 		</section>
 		<section id="seccion">
 			<div class="listado">
-				<h2>Listado de Eventos Destacados por tipo</h2>
+				<h2>Listado de Eventos Destacados</h2>
 				<table border="1">
 					<tr>
 						<th>Nombre</th>
@@ -72,7 +72,7 @@
 				</table>
 			</div>
 			<div class="listado">
-				<h2>Listado de Eventos Activos por tipo <span></span></h2>
+				<h2>Listado de Eventos Activos<span></span></h2>
 				<table border="1">
 					<tr>
 						<th>Nombre</th>
