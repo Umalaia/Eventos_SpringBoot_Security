@@ -22,7 +22,7 @@
 					<a th:href="@{/misReservas}">Mis reservas</a>
 				</button>
 				<button sec:authorize="isAuthenticated()">
-					<a th:href="@{/signout}">Cerrar sesión</a>
+					<a th:href="@{/logout}">Cerrar sesión</a>
 				</button>
 				<button sec:authorize="!isAuthenticated()">
 					<a th:href="@{/login}">Login</a>

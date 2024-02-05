@@ -96,7 +96,7 @@ public class HomeController {
 	 * @return 		   Después de cerrar la sesión, redirige al usuario a la página de
 	 *         		   inicio ("/home").
 	 */
-	@GetMapping("/signout")
+	@GetMapping("/logout")
 	public String cerrarSesion(HttpSession misesion) {
 		misesion.removeAttribute("usuario");
 		misesion.invalidate();
@@ -109,7 +109,6 @@ public class HomeController {
 	 * Guarda la información del usuario en la sesión y luego redirige a la vista
 	 * "login"
 	 * 
-	 * @param aut      	Toma información del objeto Usuario autentificado
 	 * @param model    	Utilizado pasar datos a la vista.
 	 * @param misesion 	Usado para para manejar la sesión
 	 *                 	misesion.setAttribute("usuario", usuario); Almacena el objeto
@@ -122,40 +121,10 @@ public class HomeController {
 	 *                	 renderizará la vista de login.
 	 */
 	@GetMapping("/login")
-	public String procesarLogin(Authentication aut, Model model, HttpSession misesion, Usuario usuario) {
+	public String procesarLogin(Model model, HttpSession misesion, Usuario usuario) {
 		misesion.setAttribute("usuario", usuario);
 		return "login";
 	}
-
-	/**
-	 * Este método maneja solicitudes POST para el inicio de sesión. Intenta
-	 * autenticar al usuario con el nombre de usuario y la contraseña
-	 * proporcionados, Sí la autenticación es exitosa, almacena la información del
-	 * usuario en la sesión y redirige al usuario a la página de inicio. Si la
-	 * autenticación falla, agrega un mensaje de error y redirige al usuario de
-	 * vuelta a la página de login.
-	 * 
-	 * @param username 	Parametro donde indica el nombre
-	 * @param password 	Parametro donde indica el password
-	 * @param misesion 	Objeto para controlar la sesión.
-	 * @param ratt     	Agrega un mensaje de error como atributo flash para mostrarlo
-	 *                 	después de la redirección.
-	 * @return 			Redirige al usuario a la página de login ("/login").
-	 */
-	@PostMapping("/login")
-	public String procLogin(@RequestParam("username") String username, @RequestParam("password") String password,
-			HttpSession misesion, RedirectAttributes ratt) {
-		Usuario usuario = uDao.UsuarioYpass(username, password);
-		if (usuario != null) {
-			usuario.setPassword(null);
-			usuario.setNombre(username);
-			misesion.setAttribute("usuario", usuario);
-			return "redirect:/home";
-		} else
-			ratt.addFlashAttribute("mensaje", "Usuario o Password incorrecto");
-		return "redirect:/login";
-	}
-
 	
 	// HOME
 	/**
@@ -164,18 +133,11 @@ public class HomeController {
 	 * 
 	 * @param model		Representa el modelo que se utilizará para almacenar datos y pasarlos a la vista.
 	 * @param aut		Proporciona información sobre la autenticación del usuario.
-	 * @param misesion	Representa la sesión HTTP y se utiliza para almacenar información entre diferentes solicitudes.
 	 * @param tipo		Objeto de tipo, indicando el tipo de evento.
 	 * @return
 	 */
 	@GetMapping({ "/", "/home" })
-	public String verIndex(Model model, Authentication aut, HttpSession misesion, Tipo tipo) {
-		if (aut != null && aut.isAuthenticated()) {
-			System.out.println(aut.getName() + " - " + aut.getAuthorities());
-		} else {
-			model.addAttribute("usuario", "Invitado");
-		}
-
+	public String verIndex(Model model, Authentication aut, Tipo tipo) {
 		if (tipo.getIdTipo() == 0) {
 			List<Evento> destacados = eDao.verEventosDestacados();
 			model.addAttribute("destacados", destacados);

@@ -47,21 +47,12 @@ public class DataUserConfiguration {
 				.requestMatchers("/eventosDestacados", "/eventosActivos", "/detalles/**").permitAll()
 				.requestMatchers("/eventosActivos/verDetalles/**", "/eventosDestacados/verDetalles/**").permitAll()
 				.requestMatchers("/rest/encriptar/**").permitAll()
-				// Todas las demás URLs de la Aplicación requieren autenticación
-				// Asignar permisos a URLs por ROLES
-				//.requestMatchers("/misReservas").hasAnyAuthority("ROLE_CLIENTE")
-				//.requestMatchers("/signout").hasAnyAuthority("ROLE_CLIENTE")
-
 				.anyRequest().authenticated())
 				// El formulario de Login no requiere autenticacion
-				.formLogin(form -> form.loginPage("/login").permitAll());
+				.formLogin(form -> form.loginPage("/login")
+						.defaultSuccessUrl("/home")
+						.permitAll())
+				.logout(logout -> logout.logoutSuccessUrl("/home").permitAll());
 		return http.build();
 	}
-
-	/*
-	 * @Bean public PasswordEncoder passwordEncoder() { return new
-	 * BCryptPasswordEncoder(); }
-	 */
-	
-
 }
