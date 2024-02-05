@@ -78,7 +78,7 @@ public class EventoController {
 		String username = auth.getName();
 		Evento evento = eDao.verUnEvento(idEvento);
 
-		BigDecimal precioVenta = evento.getPrecio().multiply(BigDecimal.valueOf(cantidad));
+		BigDecimal precioVenta = evento.getPrecio();
 		Reserva reserva = new Reserva(cantidad, observaciones, precioVenta, evento, uDao.verUsuario(username));
 
 		rDao.realizarReserva(reserva);
