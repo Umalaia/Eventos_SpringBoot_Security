@@ -1,19 +1,14 @@
 package eventos.configuration;
 
 import javax.sql.DataSource;
-
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-
 import org.springframework.security.provisioning.JdbcUserDetailsManager;
 import org.springframework.security.provisioning.UserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
-import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
+
 
 @EnableWebSecurity
 @Configuration
@@ -36,7 +31,6 @@ public class DataUserConfiguration {
 	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 		http.csrf(csrf -> csrf.disable());
 		// Los recursos estáticos no requieren autenticación
-
 		http.authorizeHttpRequests(authorize -> authorize
 				.requestMatchers("/static/**").permitAll()
 				.requestMatchers("/css/Index.css").permitAll()

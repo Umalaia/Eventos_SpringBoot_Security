@@ -1,12 +1,9 @@
 package eventos.modelo.dao;
 
-import java.math.BigDecimal;
-import java.util.List;
 
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-
-import eventos.modelo.entitis.Evento;
 import eventos.modelo.entitis.Reserva;
 import eventos.modelo.entitis.Usuario;
 import eventos.modelo.repository.ReservaRepository;

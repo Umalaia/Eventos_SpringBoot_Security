@@ -4,13 +4,11 @@ import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import eventos.modelo.dao.EventoDao;
 import eventos.modelo.dao.PerfilDao;
@@ -111,23 +109,15 @@ public class HomeController {
 
 	// LOGIN
 	/**
-	 * Este método se utiliza para manejar solicitudes GET a la página de login.
-	 * Guarda la información del usuario en la sesión y luego redirige a la vista
-	 * "login"
+	 * Controlador para mostrar el formulario de login.
 	 * 
-	 * @param misesion 	Usado para para manejar la sesión
-	 *                 	misesion.setAttribute("usuario", usuario); Almacena el objeto
-	 *                 	usuario en la sesión con el nombre de atributo "usuario". la
-	 *                 	información del usuario se guarda en la sesión para ser
-	 *                 	utilizada en sesiones posteriores.
-	 * @param usuario  	Objeto usuario con la información del mismo.
-	 * @return 		   	Devuelve el nombre de la vista que se mostrará después de ejecutar
-	 *         		   	este método Por lo tanto, cuando se visita la URL "/login", se
-	 *                	renderizará la vista de login.
+	 * Este método se utiliza para manejar solicitudes GET a la página de login.
+	 * Redirige a la vista "login"
+	 * 
+	 * @return 		   	Devuelve la vista "login".
 	 */
 	@GetMapping("/login")
-	public String procesarLogin(HttpSession misesion, Usuario usuario) {
-		misesion.setAttribute("usuario", usuario);
+	public String procesarLogin() {
 		return "login";
 	}
 	
