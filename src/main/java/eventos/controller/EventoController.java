@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
 import eventos.modelo.dao.EventoDao;
 import eventos.modelo.dao.ReservaDao;
 import eventos.modelo.dao.UsuarioDao;
@@ -71,13 +73,14 @@ public class EventoController {
 	 * @param observaciones Indica el valor de la variable observaciones solicitado
 	 * @param aut           Se utiliza para obtener información sobre la
 	 *                      autenticación del usuario.
+	 * @param ratt      	Atributos de redirección que se utilizan para pasar mensajes flash a través de las redirecciones.
 	 * @return 				Después de realizar la reserva, se le redirige al usuario a la página
 	 *         				"/misReservas".
 	 */
 
 	@PostMapping("/detalles/{id}")
 	public String realizarReserva(@PathVariable("id") int idEvento, @RequestParam int cantidad,
-			@RequestParam String observaciones, Authentication aut) {
+			@RequestParam String observaciones, Authentication aut, RedirectAttributes ratt) {
 		aut = SecurityContextHolder.getContext().getAuthentication();
 		String username = aut.getName();
 		Evento evento = eDao.verUnEvento(idEvento);
@@ -86,6 +89,7 @@ public class EventoController {
 		Reserva reserva = new Reserva(cantidad, observaciones, precioVenta, evento, uDao.verUsuario(username));
 
 		rDao.realizarReserva(reserva);
+		ratt.addFlashAttribute("mensaje", "Alta de reserva realizada correctamente");
 		return "redirect:/misReservas";
 	}
 
@@ -135,12 +139,13 @@ public class EventoController {
 	 * @param observaciones Indica el valor de la observaciones también solicitado
 	 * @param aut           Se utiliza para obtener información sobre la
 	 *                      autenticación del usuario.
+	 * @param ratt      	Atributos de redirección que se utilizan para pasar mensajes flash a través de las redirecciones.
 	 * @return 				Después de realizar la reserva, la aplicación redirige al usuario a
 	 *         				la página "/misReservas".
 	 */
 	@PostMapping("/eventosDestacados/verDetalles/{id}")
 	public String realizarReservaDestacado(@PathVariable("id") int idEvento, @RequestParam int cantidad,
-			@RequestParam String observaciones, Authentication aut) {
+			@RequestParam String observaciones, Authentication aut, RedirectAttributes ratt) {
 		aut = SecurityContextHolder.getContext().getAuthentication();
 		String username = aut.getName();
 		Evento evento = eDao.verUnEvento(idEvento);
@@ -149,6 +154,7 @@ public class EventoController {
 		Reserva reserva = new Reserva(cantidad, observaciones, precioVenta, evento, uDao.verUsuario(username));
 
 		rDao.realizarReserva(reserva);
+		ratt.addFlashAttribute("mensaje", "Alta de reserva realizada correctamente");
 		return "redirect:/misReservas";
 	}
 
@@ -197,12 +203,13 @@ public class EventoController {
 	 * @param observaciones Indica el valor de la observaciones también solicitado
 	 * @param aut           Se utiliza para obtener información sobre la
 	 *                      autenticación del usuario.
+	 * @param ratt      	Atributos de redirección que se utilizan para pasar mensajes flash a través de las redirecciones.
 	 * @return 				El método devuelve el nombre de la vista que se mostrará al usuario.
 	 *        		   		En este caso, vista "misReservas".
 	 */
 	@PostMapping("/eventosActivos/verDetalles/{id}")
 	public String realizarReservaActivos(@PathVariable("id") int idEvento, @RequestParam int cantidad,
-			@RequestParam String observaciones, Authentication aut) {
+			@RequestParam String observaciones, Authentication aut, RedirectAttributes ratt) {
 		aut = SecurityContextHolder.getContext().getAuthentication();
 		String username = aut.getName();
 		Evento evento = eDao.verUnEvento(idEvento);
@@ -211,6 +218,7 @@ public class EventoController {
 		Reserva reserva = new Reserva(cantidad, observaciones, precioVenta, evento, uDao.verUsuario(username));
 
 		rDao.realizarReserva(reserva);
+		ratt.addFlashAttribute("mensaje", "Alta de reserva realizada correctamente");
 		return "redirect:/misReservas";
 	}
 }
