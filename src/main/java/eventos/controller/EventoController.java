@@ -68,7 +68,7 @@ public class EventoController {
 	 * reserva para un evento específico con la cantidad y observaciones
 	 * proporcionadas, y luego redirige al usuario a la página de sus reservas.
 	 * 
-	 * @param idEvento      Indica el valor de la variable
+	 * @param idEvento      Indica el valor de la variable idEvento
 	 * @param cantidad      Indica el valor de la variable cantidad solicitado
 	 * @param observaciones Indica el valor de la variable observaciones solicitado
 	 * @param aut           Se utiliza para obtener información sobre la
@@ -102,7 +102,7 @@ public class EventoController {
 	 * información de autenticación del usuario, realiza cálculos relacionados con
 	 * reservas y luego pasa esos datos a la vista "detallesDestacado".
 	 * 
-	 * @param idEvento Indica el valor de la variable
+	 * @param idEvento Identificador del evento para el cual se mostrarán los detalles destacados.
 	 * @param model    Se utiliza para almacenar datos y pasarlos a la vista.
 	 * @param aut      Se utiliza para obtener información sobre la autenticación
 	 *                 del usuario.
@@ -134,7 +134,7 @@ public class EventoController {
 	 * destacado específico con la cantidad y observaciones proporcionadas, y luego
 	 * redirige al usuario a la página de sus reservas.
 	 * 
-	 * @param idEvento      Indica el valor de la variable
+	 * @param idEvento      Indica el valor de la variable idEvento
 	 * @param cantidad      Indica el valor de la variable cantidad solicitado
 	 * @param observaciones Indica el valor de la observaciones también solicitado
 	 * @param aut           Se utiliza para obtener información sobre la
@@ -167,7 +167,7 @@ public class EventoController {
 	 * información de autenticación del usuario, realiza cálculos relacionados con
 	 * reservas y luego pasa esos datos a la vista "detallesActivos".
 	 * 
-	 * @param idEvento Indica el valor de la variable
+	 * @param idEvento Identificador del evento para el cual se mostrarán los detalles de eventos activos.
 	 * @param model    Se utiliza para almacenar datos y pasarlos a la vista.
 	 * @param aut      Se utiliza para obtener información sobre la autenticación
 	 *                 del usuario.
@@ -198,7 +198,7 @@ public class EventoController {
 	 * específico con la cantidad y observaciones proporcionadas, y luego redirige
 	 * al usuario a la página de sus reservas.
 	 * 
-	 * @param idEvento      Indica el valor de la variable
+	 * @param idEvento      Indica el valor de la variable idEvento
 	 * @param cantidad      Indica el valor de la variable cantidad solicitado
 	 * @param observaciones Indica el valor de la observaciones también solicitado
 	 * @param aut           Se utiliza para obtener información sobre la

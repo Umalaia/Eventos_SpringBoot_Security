@@ -23,7 +23,7 @@ public class ReservaController {
 
 	// VER MIS RESERVAS
 	/**
-	 * Controlador para mostrar las reservas del usuario autenticado.
+	 * Controlador para mostrar las reservas del usuario logueado.
 	 * 
 	 * Este método maneja solicitudes GET para mostrar las reservas de un usuario.
 	 * Verifica si hay un usuario autenticado, obtiene la información del usuario y
@@ -56,8 +56,8 @@ public class ReservaController {
 	 * Controlador para eliminar una reserva específica.
 	 * 
 	 * Este método maneja solicitudes GET para eliminar una reserva específica.
-	 * Intenta eliminar la reserva con el identificador proporcionado, agrega un
-	 * mensaje al modelo según el resultado y redirige al usuario de vuelta a la
+	 * Se eliminar la reserva con el identificador proporcionado, agrega un
+	 * mensaje al modelo si no se ha podido eliminar y redirige al usuario de vuelta a la
 	 * página de sus reservas.
 	 * 
 	 * @param idReserva Identificador de la reserva a eliminar

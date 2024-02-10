@@ -32,11 +32,8 @@ public class DataUserConfiguration {
 		http.csrf(csrf -> csrf.disable());
 		// Los recursos estáticos no requieren autenticación
 		http.authorizeHttpRequests(authorize -> authorize
-				.requestMatchers("/static/**").permitAll()
-				.requestMatchers("/css/Index.css").permitAll()
-				.requestMatchers("/img/Logo.png").permitAll()
+				.requestMatchers("/static/**", "/css/**", "/js/**", "/json/**", "/img/**").permitAll()
 				.requestMatchers("/home").permitAll()
-				// Las vistas públicas no requieren autenticación
 				.requestMatchers("/", "/signup", "/login", "/logout").permitAll()
 				.requestMatchers("/eventosDestacados", "/eventosActivos", "/detalles/**").permitAll()
 				.requestMatchers("/eventosActivos/verDetalles/**", "/eventosDestacados/verDetalles/**").permitAll()

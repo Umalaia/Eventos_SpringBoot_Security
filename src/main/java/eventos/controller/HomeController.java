@@ -34,7 +34,7 @@ public class HomeController {
 	/**
 	 * Controlador para mostrar el formulario de registro.
 	 * 
-	 * Este método se utiliza para mostrar un formulario de registro cuando un
+	 * Este método se utiliza para mostrar el formulario de registro cuando un
 	 * usuario visita la URL "/signup". Inicializa un objeto Usuario vacío y lo pasa
 	 * al modelo, luego redirige a la vista "registro".
 	 * 
@@ -52,7 +52,7 @@ public class HomeController {
 	 * Controlador para procesar el registro de nuevos usuarios.
 	 * 
 	 * Este método se utiliza para procesar solicitudes de registro de nuevos
-	 * usuarios. Configura la información del usuario, intenta registrar al usuario
+	 * usuarios. Configura la información del usuario, registra al usuario
 	 * y redirige al usuario a la página de inicio de sesión o de registro
 	 * dependiendo del resultado del registro.
 	 * 
@@ -66,7 +66,9 @@ public class HomeController {
 	 *                	usuario.getPassword()); Configura la contraseña del usuario.
 	 *                	{noop} significa no encifrado o encriptado.
 	 * @param ratt      Atributos de redirección que se utilizan para pasar mensajes flash a través de las redirecciones.
-	 * @return 			Redirige al usuario de vuelta a la página de registro ("/signup").
+	 * @return 			Redirige al usuario de vuelta a la página de registro ("/signup") en el caso de que el usuario ya exista
+	 * 					y se informa, en el caso de que no exista te devuelve a la vista del "login" y muestra un mensaje que indica
+	 * 					que el alta del usuario ha sido realizada.
 	 */
 	@PostMapping("/signup")
 	public String registrar(Model model, Usuario usuario, RedirectAttributes ratt) {
@@ -130,7 +132,7 @@ public class HomeController {
 	 * 
 	 * @param model		Representa el modelo que se utilizará para almacenar datos y pasarlos a la vista.
 	 * @param tipo		Objeto de tipo, indicando el tipo de evento que se mostrará (opcional).
-	 * @return			El nombre de la vista que se mostrará (en este caso, "home").
+	 * @return			La vista "home".
 	 */
 	@GetMapping({ "/", "/home" })
 	public String verIndex(Model model, Tipo tipo) {
